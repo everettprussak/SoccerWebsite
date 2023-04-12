@@ -1,0 +1,52 @@
+<html>
+<h1>Schedule Match</h1>
+<a href="teams"> Back </a>
+<br>
+<br>
+
+<form action = "{{ url_for('schedule_game') }}" method = "post">Pick Away TeamID!</a>
+
+  <br>
+
+  <label for="awayID">
+    <i class="fas fa-user"></i>
+    </label>
+    <input type="text" name="awayID" placeholder="TeamID" id="awayID" required>
+
+
+      <input type="submit" value="Continue">
+      <div class="msg">{{ msg }}</div>
+  </form>
+
+  <br>
+
+<table>
+  <thread>
+    <tr>
+      <th>teamID</th>
+      <th>teamName</th>
+      <th>teamCity</th>
+      <th>totalGoals</th>
+      <th>wins</th>
+      <th>losses</th>
+      <th>coachID</th>
+    </tr>
+    <tbody>
+      {% for row in data %}
+      <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+        <td>{{row[2]}}</td>
+        <td>{{row[3]}}</td>
+        <td>{{row[4]}}</td>
+        <td>{{row[5]}}</td>
+        <td>{{row[6]}}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </thread>
+</table>
+
+
+
+</html>

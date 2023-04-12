@@ -1,0 +1,27 @@
+<html>
+<h1> View Players</h1>
+<a href="teams"> Back </a>
+
+<br>
+<br>
+<table>
+  <tr>
+    <th>playerID</th>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Position</th>
+    <th>Goals</th>
+  </tr>
+  {% for row in data %}
+  <tr>
+    <td>{{row[0]}}</td>
+    <td>{{row[1]}}</td>
+    <td>{{row[2]}}</td>
+    <td>{{row[3]}}</td>
+    <td>{{row[4]}}</td>
+  </tr>
+  {% endfor %}
+
+</table>
+
+</html>

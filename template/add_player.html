@@ -1,0 +1,32 @@
+<html>
+<title>Player Addition</title>
+<h1>Adding Player to Roster</h1>
+<a href='teams'>Back</a>
+<br>
+<br>
+<form action = "{{ url_for('add_player') }}" method = "post">Add Player!</a>
+  <br>
+  <br>
+  <label for="name">
+    <i class="fas fa-user"></i>
+    </label>
+    <input type="text" name="name" placeholder="Player Name" id="name" required>
+
+  <label for="age">
+      <i class="fas fa-user"></i>
+      </label>
+      <input type="text" name="age" placeholder="Player Age" id="age" required>
+
+    <select name="option" id="option">
+      <option value="goalie">Goalie</option>
+      <option value="attacker">Attacker</option>
+      <option value="middle">Midfield</option>
+      <option value="defense">Defender</option>
+    </select>
+
+    <div class="msg">{{ msg }}</div>
+
+    <input type="submit" value="Add">
+  </form>
+
+</html>

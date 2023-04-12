@@ -1,0 +1,21 @@
+<html>
+<title> Team Sign-In </title>
+<h1>Team Login Page!</h1>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<form action = "{{ url_for('team_sign') }}" method = "post">Team Login</a>
+  <label for="teamID">
+    <i class="fas fa-user"></i>
+    </label>
+    <input type="text" name="teamID" placeholder="TeamID Number" id="teamID" required>
+    <label for="teamName">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input type="text" name="teamName" placeholder="Team Name" id="teamName" required>
+				<div class="msg">{{ msg }}</div>
+				<input type="submit" value="Login">
+      </form>
+
+  <a href='index'>Home</a>
+</html>
