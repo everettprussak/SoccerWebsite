@@ -215,17 +215,76 @@ def misc2():
     for i in record:
         print(i)
 
+
+def delete():
+    query = '''
+    DELETE FROM goal;
+    '''
+
+    query1 = '''
+    DELETE FROM game;
+    '''
+    cursor.execute(query)
+    conn.commit()
+    cursor.execute(query1)
+    conn.commit()
+
+
+def restartTeamRecord():
+    query = '''
+    UPDATE teams
+    SET totalGoals = 0
+    '''
+
+    query1 = '''
+    UPDATE teams
+    SET wins = 0
+    '''
+
+    query2 = '''
+    UPDATE teams
+    SET losses = 0
+    '''
+
+    query3 = '''
+    UPDATE player
+    SET goals = NULL
+    '''
+
+    cursor.execute(query)
+    conn.commit()
+    cursor.execute(query1)
+    conn.commit()
+    cursor.execute(query2)
+    conn.commit()
+    cursor.execute(query3)
+    conn.commit()
+
 #deleteGoals()
 #enterTeams()
 #createPlayerTable()
 #createTeamInfoTable()
 #createGameTable()
-getTeams()
+#getTeams()
 #createCoachTable()
 #misc()
-misc2()
+#misc2()
 #createGoalTable()
 #updateGameTable()
+delete()
+restartTeamRecord()
+
+query = '''
+SELECT COUNT(*)
+FROM game
+WHERE homeID = 5
+AND homeScore > awayScore
+;
+'''
+
+cursor.execute(query)
+records = cursor.fetchone()
+print(records[0])
 
 print(conn)
 conn.close()

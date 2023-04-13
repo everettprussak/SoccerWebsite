@@ -187,31 +187,11 @@ def edit_game_advanced():
     msg = ''
     players = ''
     #need to pass homeID and awayID for this cursor
-    cursor.execute('''
-    SELECT *
-    FROM player
-    WHERE teamID = %s
-    ;
-    ''', (session['teamID'],))
-    players = cursor.fetchall()
 
+    players = getPlayerTeam(session['teamID'])
+    players2 = getPlayerTeam(session['otherID'])
 
-    cursor.execute('''
-    SELECT *
-    FROM player
-    WHERE teamID = %s
-    ;
-    ''', (session['otherID'],))
-    players2 = cursor.fetchall()
-
-    cursor.execute('''
-    SELECT *
-    FROM game
-    WHERE gameID = %s
-    ;
-    ''', (session['gameID'],))
-
-    game = cursor.fetchone()
+    game = getGameInfo(session['gameID'])
 
     homeScore = game[3]
     awayScore = game[4]
@@ -220,15 +200,9 @@ def edit_game_advanced():
     if request.method == 'POST':
         saving = request.form['option']
         playerID = request.form['playerID']
-        query = '''
-        SELECT *
-        FROM player
-        WHERE playerID = %s
-        AND teamID IN (%s, %s)
-        ;
-        '''
-        cursor.execute(query,(playerID,session['teamID'],session['otherID'],))
-        record = cursor.fetchall()
+
+        record = checkPlayerValidity(playerID,session['teamID'],session['otherID'])
+
         if(len(record)==0):
                 msg = '''
                 PlayedID not present in this Game.
@@ -237,118 +211,333 @@ def edit_game_advanced():
                 Please Try Again!
                 '''
         else:
-            session['game_player_list'].append(playerID)
             if saving == 'save':
-                query = '''
-                INSERT INTO goal (playerID,gameID)
-                VALUES (%s, %s)
-                ;
-                '''
-                cursor.execute(query,(playerID,session['gameID'],))
-                goal_record = cursor.fetchall()
-                print(len(goal_record))
+                insertIntoGoal(playerID,session['gameID'])
+                team_of_player = teamOfPlayer(playerID)
+                updatePlayerGoals(playerID)
 
-                conn.commit()
-
-                query = '''
-                SELECT teamID
-                FROM player
-                WHERE playerID = %s
-                ;
-                '''
-                cursor.execute(query,(playerID,))
-                team_of_player = cursor.fetchone()
-
-                query = '''
-                SELECT player.teamID, COUNT(*)
-                FROM goal
-                INNER JOIN player
-                ON goal.playerID = player.playerID
-                WHERE goal.gameID = %s
-                GROUP BY player.teamID;
-                '''
-
-                cursor.execute(query,(session['gameID'],))
-                record = cursor.fetchall()
-                if(len(record)==1):
-                    if(record[0][0]==int(session['otherID'])):
-                        record.append([session['teamID'],0])
-                    else:
-                        record.append([session['otherID'],0])
-                if(record[0][1]>record[1][1]):
-                    winnerID = record[0][0]
-                    loserID = record[1][0]
-                    print("WinnerID: ", winnerID, " LoserID: ", loserID)
-                    if(record[0][0]==int(session['teamID'])):
-                        a =1
-                    else:
-                        a = 1
-                    return redirect(url_for('teams'))
-                elif(record[0][1]<record[1][1]):
-                    winnerID = record[1][0]
-                    loserID = record[0][0]
-                    print("WinnerID: ", winnerID, " LoserID: ", loserID)
-                    if(record[0][0]==session['teamID']):
-                        print('team in session lost')
-                    else:
-                        print('team in session won')
-                    return redirect(url_for('teams'))
-                else:
-                    msg = "Score Is Tied. Add an OT scorer."
-
-
-            else:
-                query = '''
-                INSERT INTO goal (playerID,gameID)
-                VALUES (%s, %s)
-                ;
-                '''
-                cursor.execute(query,(playerID,session['gameID'],))
-                conn.commit()
-
-                query = '''
-                SELECT teamID
-                FROM player
-                WHERE playerID = %s
-                ;
-                '''
-
-                cursor.execute(query,(playerID,))
-                team_of_player = cursor.fetchone()
-                team_of_player = team_of_player[0]
-                print(team_of_player)
-
-                query = '''
-                SELECT totalGoals
-                FROM teams
-                WHERE teamID = %s
-                ;
-                '''
-
-                cursor.execute(query,(team_of_player,))
-                value = cursor.fetchone()
-                value = value[0]
-                value = value + 1
-
-                query = '''
-                UPDATE teams
-                SET totalGoals = %s
-                WHERE teamID = %s
-                ;
-                '''
-                cursor.execute(query,(value,team_of_player,))
-                print("success")
-                conn.commit()
-
+                record = getGameGoals(session['gameID'])
+                teamTotalGoals(record[0][0])
+                if(len(record)!=1):
+                    teamTotalGoals(record[1][0])
 
                 if(team_of_player==game[1]):
-                    #home team
                     homeTeamScoreUpdate(team_of_player,game[0])
+
                 else:
-                    #away team
                     awayTeamScoreUpdate(team_of_player,game[0])
 
+                players = getPlayerTeam(session['teamID'])
+                players2 = getPlayerTeam(session['otherID'])
+
+                gameOutcome(record[0][0],session['gameID'])
+                updateTeamGoals(record[0][0])
+
+                if(len(record)!=1):
+                    gameOutcome(record[1][0], session['gameID'])
+                    updateTeamGoals(record[1][0])
+                else:
+                    if int(session['teamID']) == int(record[0][0]):
+                        gameOutcome(session['otherID'],session['gameID'])
+                        updateTeamGoals(session['otherID'])
+                    else:
+                        gameOutcome(session['teamID'],session['gameID'])
+                        updateTeamGoals(session['teamID'])
+
+                return redirect(url_for('teams'))
+
+            else:
+                insertIntoGoal(playerID,session['gameID'])
+                team_of_player = teamOfPlayer(playerID)
+                updatePlayerGoals(playerID)
+
+                #team_of_player = teamOfPlayer(playerID)
+
+                record = getGameGoals(session['gameID'])
+                teamTotalGoals(record[0][0])
+                if(len(record)!=1):
+                    teamTotalGoals(record[1][0])
+
+                if(team_of_player==game[1]):
+                    homeScore = homeTeamScoreUpdate(team_of_player,game[0])
+
+                else:
+                    awayScore = awayTeamScoreUpdate(team_of_player,game[0])
+
+                players = getPlayerTeam(session['teamID'])
+                players2 = getPlayerTeam(session['otherID'])
+
+                gameOutcome(record[0][0],session['gameID'])
+                updateTeamGoals(record[0][0])
+
+                if(len(record)!=1):
+                    gameOutcome(record[1][0], session['gameID'])
+                    updateTeamGoals(record[1][0])
+                else:
+                    if int(session['teamID']) == int(record[0][0]):
+                        gameOutcome(session['otherID'],session['gameID'])
+                        updateTeamGoals(session['otherID'])
+                    else:
+                        gameOutcome(session['teamID'],session['gameID'])
+                        updateTeamGoals(session['teamID'])
+
     return render_template('edit_game_advanced.html',msg=msg,data=players2,teamID=session['teamID'],otherID=session['otherID'],gameID=session['gameID'],homeScore=homeScore,awayScore=awayScore,data1=players)
+
+
+
+
+def updatePlayerGoals(playerID):
+    query = '''
+    SELECT COUNT(*)
+    FROM goal
+    WHERE playerID = %s
+    ;
+    '''
+
+    cursor.execute(query,(playerID,))
+    numGoals = cursor.fetchone()[0]
+    print(numGoals)
+
+    query = '''
+    UPDATE player
+    SET goals = %s
+    WHERE playerID = %s
+    ;
+    '''
+    cursor.execute(query,(numGoals,playerID,))
+    conn.commit()
+
+
+#need to finish this
+def teamTotalGoals(teamID):
+    query = '''
+    SELECT COUNT(*)
+    FROM goal
+    '''
+
+
+def gameOutcome(teamID,gameID):
+    game = getGameInfo(gameID)
+    homeID = game[1]
+    homeScore = game[3]
+    awayID = game[2]
+    awayScore = game[4]
+    if int(homeID) == int(teamID):
+        print('no?')
+        currID = homeID
+    else:
+        print('yes')
+        currID = awayID
+
+    #still getting wins and losses anyways?
+    totalWins = getWins(currID)
+    totalLoss = getLosses(currID)
+
+    updateTeamRecord(currID,totalWins,totalLoss)
+
+def updateTeamRecord(currID,totalWins,totalLoss):
+    query = '''
+    UPDATE teams
+    SET wins = %s
+    WHERE teamID = %s
+    ;
+    '''
+
+    query1 = '''
+    UPDATE teams
+    SET losses = %s
+    WHERE teamID = %s
+    ;
+    '''
+
+    cursor.execute(query,(totalWins,currID,))
+    conn.commit()
+    cursor.execute(query1,(totalLoss,currID,))
+    conn.commit()
+
+
+def getWins(homeID):
+    query = '''
+    SELECT COUNT(*)
+    FROM game
+    WHERE homeID = %s
+    AND homeScore > awayScore
+    ;
+    '''
+
+    print(homeID)
+    cursor.execute(query,(homeID,))
+
+    homeWins = cursor.fetchone()
+    homeWins = homeWins[0]
+    print('homeWins: ', homeWins)
+
+    query = '''
+    SELECT COUNT(*)
+    FROM game
+    WHERE awayID = %s
+    AND awayScore > homeScore
+    ;
+    '''
+
+    cursor.execute(query,(homeID,))
+
+    awayWins = cursor.fetchone()
+    awayWins = awayWins[0]
+    print('awayWins: ', awayWins)
+    totalWins = homeWins + awayWins
+    return totalWins
+
+
+def getLosses(homeID):
+    query = '''
+    SELECT COUNT(*)
+    FROM game
+    WHERE awayID = %s
+    AND homeScore > awayScore
+    ;
+    '''
+
+    cursor.execute(query,(homeID,))
+
+    homeLoss = cursor.fetchone()
+    homeLoss = homeLoss[0]
+
+    query = '''
+    SELECT COUNT(*)
+    FROM game
+    WHERE homeID = %s
+    AND awayScore > homeScore
+    ;
+    '''
+
+    cursor.execute(query,(homeID,))
+
+    awayLoss = cursor.fetchone()
+    awayLoss = awayLoss[0]
+
+    return homeLoss + awayLoss
+
+
+
+
+def getGameGoals(gameID):
+    query = '''
+    SELECT player.teamID, COUNT(*)
+    FROM goal
+    INNER JOIN player
+    ON goal.playerID = player.playerID
+    WHERE goal.gameID = %s
+    GROUP BY player.teamID;
+    '''
+
+    cursor.execute(query,(gameID,))
+
+    record = cursor.fetchall()
+    print(record)
+    return record
+
+
+def checkPlayerValidity(playerID,teamID,otherID):
+    query = '''
+    SELECT *
+    FROM player
+    WHERE playerID = %s
+    AND teamID IN (%s, %s)
+    ;
+    '''
+
+    cursor.execute(query,(playerID,teamID,otherID,))
+    record = cursor.fetchall()
+    return record
+
+
+def updateTeamGoals(teamID):
+    query = '''
+    SELECT COUNT(*)
+    FROM goal
+    INNER JOIN player
+    ON goal.playerID = player.playerID
+    WHERE player.teamID = %s
+    ;
+    '''
+
+    cursor.execute(query,(teamID,))
+    record = cursor.fetchone()
+    print(record[0])
+
+
+    query = '''
+    UPDATE teams
+    SET totalGoals = %s
+    WHERE teamID = %s
+    ;
+    '''
+    cursor.execute(query,(record[0],teamID,))
+    print('teamGoals Updated')
+    conn.commit()
+
+
+def getGameInfo(gameID):
+    cursor.execute('''
+    SELECT *
+    FROM game
+    WHERE gameID = %s
+    ;
+    ''', (gameID,))
+
+    game = cursor.fetchone()
+
+    return game
+
+
+def getTeamGoals(team_of_player):
+    query = '''
+    SELECT totalGoals
+    FROM teams
+    WHERE teamID = %s
+    ;
+    '''
+
+    cursor.execute(query,(team_of_player,))
+    value = cursor.fetchone()
+    value = value[0]
+    return value
+
+def teamOfPlayer(playerID):
+        query = '''
+        SELECT teamID
+        FROM player
+        WHERE playerID = %s
+        ;
+        '''
+        cursor.execute(query,(playerID,))
+        team_of_player = cursor.fetchone()
+        return team_of_player[0]
+
+
+def insertIntoGoal(playerID, gameID):
+    query = '''
+    INSERT INTO goal (playerID,gameID)
+    VALUES (%s, %s)
+    ;
+    '''
+    cursor.execute(query,(playerID,gameID,))
+    conn.commit()
+
+    print("inserted goal for player: ", playerID)
+
+
+def getPlayerTeam(teamID):
+    cursor.execute('''
+    SELECT *
+    FROM player
+    WHERE teamID = %s
+    ;
+    ''', (teamID,))
+
+    record = cursor.fetchall()
+    return record
 
 
 def homeTeamScoreUpdate(team, game):
@@ -375,6 +564,34 @@ def homeTeamScoreUpdate(team, game):
     conn.commit()
 
     print('successful update')
+    return homeScore
+
+
+def awayTeamScoreUpdate(team, game):
+    query = '''
+    SELECT awayScore
+    FROM game
+    WHERE gameID = %s
+    ;
+    '''
+
+    cursor.execute(query,(game,))
+    awayScore = cursor.fetchone()
+    awayScore = awayScore[0]
+    awayScore = awayScore + 1
+
+    query = '''
+    UPDATE game
+    SET awayScore = %s
+    WHERE gameID = %s
+    ;
+    '''
+
+    cursor.execute(query,(awayScore,game,))
+    conn.commit()
+
+    print('successful update')
+    return awayScore
 
 
 if __name__ == "__main__":
