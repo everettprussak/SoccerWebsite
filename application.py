@@ -73,10 +73,98 @@ def teams():
             return redirect(url_for('schedule_game'))
         elif(team_choice=='edit'):
             return redirect(url_for('edit_game'))
+        elif(team_choice=='games'):
+            return redirect(url_for('view_games'))
 
 
     return render_template('teams.html',data=value,name=session['teamName'],teamID=session['teamID'])
 
+@app.route("/view_games",methods=['GET','POST'])
+def view_games():
+    games1 = viewGamesMore()
+    msg = ''
+    if (len(games1)==0):
+        msg = 'Your team has not played any games! Schedule a game in the main menu!'
+    if request.method == 'POST':
+        gameID = request.form['gameID']
+        if(gameID.isnumeric()==False):
+            msg = 'Incorrect. Try again!'
+        else:
+            gameID = int(gameID)
+            found = False
+            ind = 0
+            for i in games1:
+                if(i[0] == gameID):
+                    found = True
+                    break
+                ind = ind + 1
+
+            if found:
+                session['gameID'] = gameID
+                print(gameID)
+                return redirect(url_for('view_game_info'))
+
+    return render_template('view_games.html',msg=msg,games=games1)
+
+
+@app.route("/view_game_info",methods=['GET','POST'])
+def view_game_info():
+    goals = getGoalsInfo(session['gameID'])
+    gameID = session['gameID']
+    game = getGameInfo(gameID)
+    print(game)
+    teamID = teamName(game[1])[0]
+    otherID = teamName(game[2])[0]
+    homeScore = game[3]
+    awayScore = game[4]
+    return render_template('view_games_info.html',goals=goals,gameID=session['gameID'],teamID=teamID,otherID=otherID,homeScore=homeScore,awayScore=awayScore)
+
+
+def teamName(teamID):
+    query = '''
+    SELECT teamName
+    FROM teams
+    WHERE teamID = %s
+    ;
+    '''
+
+    cursor.execute(query,(teamID,))
+    name = cursor.fetchone()
+    return name
+
+
+def getGoalsInfo(gameID):
+    query = '''
+    SELECT goal.gameID,goal.goalID, player.playerID, player.Name, player.teamID, teams.teamName, teams.teamCity
+    FROM goal
+    INNER JOIN player
+    ON player.playerID = goal.playerID
+    INNER JOIN teams
+    ON player.teamID = teams.teamID
+    WHERE gameID = %s
+    ORDER BY goalID ASC;
+    '''
+
+    cursor.execute(query,(gameID,))
+    goals = cursor.fetchall()
+    return goals
+
+
+def viewGamesMore():
+    teamID = session['teamID']
+    query = '''
+    SELECT g.gameID, g.homeID, t1.teamName AS homeTeam, g.homeScore,g.awayID, t2.teamName AS awayTeam, g.awayScore
+    FROM game g
+    JOIN teams t1 ON g.homeID = t1.teamID
+    JOIN teams t2 ON g.awayID = t2.teamID
+    WHERE g.homeID = %s
+    OR g.awayID = %s;
+    '''
+
+    cursor.execute(query,(teamID,teamID,))
+    records = cursor.fetchall()
+
+    return records
 
 @app.route("/add_player",methods=['GET','POST'])
 def add_player():
