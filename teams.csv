@@ -1,0 +1,37 @@
+(team_id, team_name, team_city, team_goals, wins, loses, coach_id)
+
+1,Argentina,Buenos Aires,null,null,null,1
+2,Australia,null,null,null,2
+3,Belgium,null,null,null,3
+4,Brazil,null,null,null,4
+5,Cameroon,null,null,null,5
+6,Canada,null,null,null,6
+7,Costa Rica,null,null,null,7
+8,Croatia,null,null,null,8
+9,Denmark,null,null,null,9
+10,Ecuador,null,null,null,10
+
+11,England,null,null,null,11
+12,France,null,null,null,12
+13,Germany,null,null,null,13
+14,Ghana,null,null,null,14
+15,Iran,null,null,null,15
+16,Japan,null,null,null,16
+17,Korea Republic,null,null,null,17
+18,Mexico,null,null,null,18
+19,Morocco,null,null,null,19
+20,Netherlands,null,null,null,20
+21,Poland,null,null,null,21
+22,Portugal,null,null,null,22
+23,Qatar,null,null,null,23
+24,Saudi Arabia,null,null,null,24
+25,Senegal,null,null,null,25
+26,Serbia,null,null,null,26
+27,Spain,null,null,null,27
+28,Switzerland,null,null,null,28
+29,Tunisia,null,null,null,29
+30,United States,null,null,null,30
+31,Uruguay,null,null,null,31
+32,Wales,null,null,null,32
+
+
