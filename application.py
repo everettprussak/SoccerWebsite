@@ -61,10 +61,8 @@ def player_sign():
 def teams():
     cursor.execute('SELECT * FROM teams;')
     value = cursor.fetchall()
-    print(value)
     if request.method == 'POST':
         team_choice = request.form['option']
-        print(team_choice)
         if(team_choice=='add_player'):
             return redirect(url_for('add_player'))
         elif(team_choice=='players'):
@@ -75,9 +73,140 @@ def teams():
             return redirect(url_for('edit_game'))
         elif(team_choice=='games'):
             return redirect(url_for('view_games'))
+        elif(team_choice=='update'):
+            return redirect(url_for('update_team'))
+        elif(team_choice=='standings'):
+            return redirect(url_for('standings'))
+        elif(team_choice=='delete_game'):
+            return redirect(url_for('delete_game'))
 
 
     return render_template('teams.html',data=value,name=session['teamName'],teamID=session['teamID'])
+
+
+@app.route("/delete_game",methods=['GET','POST'])
+def delete_game():
+    teamID = session['teamID']
+    msg = ''
+
+    games = viewGamesMore()
+
+    if request.method == 'POST':
+        gameID = request.form['gameID']
+        msg = str(gameID)
+        found = False
+
+        for i in games:
+            if str(gameID) == str(i[0]):
+                found = True
+
+            if found==True:
+                msg = 'Game Found'
+                gameInfo = getGameInfo(gameID)
+                deleteGameMore(gameID)
+                deleteGameGoals(gameID)
+                totalWins = getWins(gameInfo[1])
+                totalLoss = getLosses(gameInfo[1])
+                updateTeamRecord(gameInfo[1],totalWins,totalLoss)
+                totalWins = getWins(gameInfo[2])
+                totalLoss = getLosses(gameInfo[2])
+                updateTeamRecord(gameInfo[2],totalWins,totalLoss)
+                updateTeamGoals(gameInfo[1])
+                updateTeamGoals(gameInfo[2])
+                cursor.execute('SELECT * FROM player WHERE teamID = ' + str(gameInfo[1]) + ';')
+                team1 = cursor.fetchall()
+                cursor.execute('SELECT * FROM player WHERE teamID = ' + str(gameInfo[2]) + ';')
+                team2 = cursor.fetchall()
+                for i in team1:
+                    updatePlayerGoals(i[0])
+
+                for i in team2:
+                    updatePlayerGoals(i[0])
+                return redirect(url_for('teams'))
+            else:
+                msg = 'Game Not Found!'
+
+
+    return render_template('delete_game.html',games=games,msg=msg)
+
+
+def deleteGameMore(gameID):
+    query = '''
+    DELETE FROM game
+    WHERE gameID = %s
+    ;
+    '''
+
+    cursor.execute(query,(gameID,))
+    conn.commit()
+
+def deleteGameGoals(gameID):
+    query = '''
+    DELETE FROM goal
+    WHERE gameID = %s
+    ;
+    '''
+
+    cursor.execute(query,(gameID,))
+    conn.commit()
+
+
+@app.route("/standings",methods=['GET','POST'])
+def standings():
+    query = '''
+    SELECT *
+    FROM teams
+    ORDER BY wins DESC, totalGoals DESC
+    ;
+    '''
+
+    cursor.execute(query)
+    standings = cursor.fetchall()
+    place = 1
+    new_standings = []
+    for i in standings:
+        a = list(i)
+        a.append(place)
+        i = tuple(a)
+        place = place + 1
+        new_standings.append(a)
+
+
+    return render_template('standings.html',standings=new_standings)
+
+
+
+@app.route("/update_team",methods=['GET','POST'])
+def update_team():
+    if request.method == 'POST':
+        teamID = session['teamID']
+        team_name = request.form['name']
+        team_city = request.form['city']
+
+        updateTeamQuery(teamID,team_name,team_city)
+        return redirect(url_for('teams'))
+    return render_template('update_team.html')
+
+
+def updateTeamQuery(teamID,name,city):
+    query = '''
+    UPDATE teams
+    SET teamName = %s
+    WHERE teamID = %s
+    ;
+    '''
+
+    query1 = '''
+    UPDATE teams
+    SET teamCity = %s
+    WHERE teamID = %s
+    ;
+    '''
+
+    cursor.execute(query,(name,teamID,))
+    conn.commit()
+    cursor.execute(query1,(city,teamID,))
+    conn.commit()
 
 @app.route("/view_games",methods=['GET','POST'])
 def view_games():
@@ -101,7 +230,6 @@ def view_games():
 
             if found:
                 session['gameID'] = gameID
-                print(gameID)
                 return redirect(url_for('view_game_info'))
 
     return render_template('view_games.html',msg=msg,games=games1)
@@ -112,7 +240,6 @@ def view_game_info():
     goals = getGoalsInfo(session['gameID'])
     gameID = session['gameID']
     game = getGameInfo(gameID)
-    print(game)
     teamID = teamName(game[1])[0]
     otherID = teamName(game[2])[0]
     homeScore = game[3]
@@ -274,7 +401,6 @@ def edit_game():
 def edit_game_advanced():
     msg = ''
     players = ''
-    #need to pass homeID and awayID for this cursor
 
     players = getPlayerTeam(session['teamID'])
     players2 = getPlayerTeam(session['otherID'])
@@ -369,6 +495,13 @@ def edit_game_advanced():
                         gameOutcome(session['teamID'],session['gameID'])
                         updateTeamGoals(session['teamID'])
 
+
+    if int(session['teamID']) == int(game[1]):
+        a = 1 #nothing here
+    else:
+        homeScore_other = homeScore
+        homeScore = awayScore
+        awayScore = homeScore_other
     return render_template('edit_game_advanced.html',msg=msg,data=players2,teamID=session['teamID'],otherID=session['otherID'],gameID=session['gameID'],homeScore=homeScore,awayScore=awayScore,data1=players)
 
 
@@ -384,7 +517,6 @@ def updatePlayerGoals(playerID):
 
     cursor.execute(query,(playerID,))
     numGoals = cursor.fetchone()[0]
-    print(numGoals)
 
     query = '''
     UPDATE player
@@ -411,10 +543,8 @@ def gameOutcome(teamID,gameID):
     awayID = game[2]
     awayScore = game[4]
     if int(homeID) == int(teamID):
-        print('no?')
         currID = homeID
     else:
-        print('yes')
         currID = awayID
 
     #still getting wins and losses anyways?
@@ -453,12 +583,10 @@ def getWins(homeID):
     ;
     '''
 
-    print(homeID)
     cursor.execute(query,(homeID,))
 
     homeWins = cursor.fetchone()
     homeWins = homeWins[0]
-    print('homeWins: ', homeWins)
 
     query = '''
     SELECT COUNT(*)
@@ -472,7 +600,6 @@ def getWins(homeID):
 
     awayWins = cursor.fetchone()
     awayWins = awayWins[0]
-    print('awayWins: ', awayWins)
     totalWins = homeWins + awayWins
     return totalWins
 
@@ -522,7 +649,6 @@ def getGameGoals(gameID):
     cursor.execute(query,(gameID,))
 
     record = cursor.fetchall()
-    print(record)
     return record
 
 
@@ -552,7 +678,6 @@ def updateTeamGoals(teamID):
 
     cursor.execute(query,(teamID,))
     record = cursor.fetchone()
-    print(record[0])
 
 
     query = '''
@@ -562,7 +687,6 @@ def updateTeamGoals(teamID):
     ;
     '''
     cursor.execute(query,(record[0],teamID,))
-    print('teamGoals Updated')
     conn.commit()
 
 
@@ -593,15 +717,15 @@ def getTeamGoals(team_of_player):
     return value
 
 def teamOfPlayer(playerID):
-        query = '''
-        SELECT teamID
-        FROM player
-        WHERE playerID = %s
-        ;
-        '''
-        cursor.execute(query,(playerID,))
-        team_of_player = cursor.fetchone()
-        return team_of_player[0]
+    query = '''
+    SELECT teamID
+    FROM player
+    WHERE playerID = %s
+    ;
+    '''
+    cursor.execute(query,(playerID,))
+    team_of_player = cursor.fetchone()
+    return team_of_player[0]
 
 
 def insertIntoGoal(playerID, gameID):
@@ -613,7 +737,7 @@ def insertIntoGoal(playerID, gameID):
     cursor.execute(query,(playerID,gameID,))
     conn.commit()
 
-    print("inserted goal for player: ", playerID)
+
 
 
 def getPlayerTeam(teamID):
@@ -651,7 +775,6 @@ def homeTeamScoreUpdate(team, game):
     cursor.execute(query,(homeScore,game,))
     conn.commit()
 
-    print('successful update')
     return homeScore
 
 
@@ -678,7 +801,6 @@ def awayTeamScoreUpdate(team, game):
     cursor.execute(query,(awayScore,game,))
     conn.commit()
 
-    print('successful update')
     return awayScore
 
 

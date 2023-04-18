@@ -71,6 +71,55 @@ def enterTeams():
     VALUES ('Warriors','Golden State',0,0,0)
     ''')
     conn.commit()
+    cursor.execute('''
+    INSERT INTO teams(teamName, teamCity, totalGoals, wins, losses)
+    VALUES ('Clippers','Los Angeles',0,0,0)
+    ''')
+    conn.commit()
+    cursor.execute('''
+    INSERT INTO teams(teamName, teamCity, totalGoals, wins, losses)
+    VALUES ('Lakers','Los Angeles',0,0,0)
+    ''')
+    conn.commit()
+
+    cursor.execute('''
+    INSERT INTO teams(teamName, teamCity, totalGoals, wins, losses)
+    VALUES ('Hawks','Atlanta',0,0,0)
+    ''')
+    conn.commit()
+    cursor.execute('''
+    INSERT INTO teams(teamName, teamCity, totalGoals, wins, losses)
+    VALUES ('Magic','Orlando',0,0,0)
+    ''')
+    conn.commit()
+
+    cursor.execute('''
+    INSERT INTO teams(teamName, teamCity, totalGoals, wins, losses)
+    VALUES ('Celtics','Boston',0,0,0)
+    ''')
+
+    conn.commit()
+
+    cursor.execute('''
+    INSERT INTO teams(teamName, teamCity, totalGoals, wins, losses)
+    VALUES ('Heat','Miami',0,0,0)
+    ''')
+
+    conn.commit()
+
+    cursor.execute('''
+    INSERT INTO teams(teamName, teamCity, totalGoals, wins, losses)
+    VALUES ('Raptors','Toronto',0,0,0)
+    ''')
+
+    conn.commit()
+
+    cursor.execute('''
+    INSERT INTO teams(teamName, teamCity, totalGoals, wins, losses)
+    VALUES ('Rockets','Houston',0,0,0)
+    ''')
+
+    conn.commit()
 
 
 def createPlayerTable():
@@ -224,9 +273,21 @@ def delete():
     query1 = '''
     DELETE FROM game;
     '''
+
+    query2 = '''
+    DELETE FROM player;
+    '''
+
+    query3 = '''
+    DELETE FROM teams;
+    '''
     cursor.execute(query)
     conn.commit()
     cursor.execute(query1)
+    conn.commit()
+    cursor.execute(query2)
+    conn.commit()
+    cursor.execute(query3)
     conn.commit()
 
 
@@ -261,7 +322,7 @@ def restartTeamRecord():
     conn.commit()
 
 #deleteGoals()
-#enterTeams()
+enterTeams()
 #createPlayerTable()
 #createTeamInfoTable()
 #createGameTable()
@@ -271,8 +332,10 @@ def restartTeamRecord():
 #misc2()
 #createGoalTable()
 #updateGameTable()
-delete()
-restartTeamRecord()
+
+#delete()
+
+#restartTeamRecord()
 
 query = '''
 SELECT COUNT(*)
