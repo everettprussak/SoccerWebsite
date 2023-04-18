@@ -1,6 +1,6 @@
 # SoccerWebsite
 
-# By:Everett Prussak and Aidan Lewis-Grenz
+# By: Everett Prussak and Aidan Lewis-Grenz
 
 ## How to run:
 
