@@ -26,7 +26,6 @@
 24,Exequiel Palacios,24,RES,null,1
 25,Alexis Mac Allister,24,RES,null,1
 26,Germán Pezzella,31,SUB,null,1
-
 27,Mathew Ryan,31,GK,null,2
 28,Jamie Maclaren,29,ST,null,2
 29,Aaron Mooy,32,CDM,null,2
@@ -53,7 +52,6 @@
 50,Thomas Deng,26,SUB,null,2
 51,Andrew Redmayne,34,SUB,null,2
 52,Garang Kuol,18,RES,null,2
-
 53,Kevin De Bruyne,31,RF,null,3
 54,Thibaut Courtois,30,GK,null,3
 55,Romelu Lukaku,29,ST,null,3
@@ -80,7 +78,6 @@
 76,Amadou Onana,21,CM,null,3
 77,Loïs Openda,23,SUB,null,3
 78,Zeno Debast,19,CB,null,3
-
 79,Ederson Santana de Moraes,29,SUB,null,4
 80,Alisson Ramses Becker,30,GK,null,4
 81,Neymar da Silva Santos Jr.,31,ST,null,4
@@ -107,7 +104,6 @@
 102,Éverton Augusto de Barros Ribeiro,34,SUB,null,4
 103,Gabriel Teodoro Martinelli Silva,21,RES,null,4
 104,Daniel Alves da Silva,39,SUB,null,4
-
 105,André Onana,27,GK,null,5
 106,André-Franck Zambo Anguissa,27,CDM,null,5
 107,Karl Toko Ekambi,30,LM,null,5
@@ -134,7 +130,6 @@
 128,Olivier Mbaizo,25,SUB,null,5
 129,Jerome Ngom Mbekeli,24,RES,null,5
 130,Souaibou Marou,22,RES,null,5
-
 131,Alphonso Davies,22,LM,null,6
 132,Jonathan David,23,ST,null,6
 133,Stephen Antunes Eustáquio,26,CDM,null,6
@@ -161,7 +156,6 @@
 154,James Pantemis,26,SUB,null,6
 155,Derek Cornelius,25,SUB,null,6
 156,Liam Fraser,25,RES,null,6
-
 157,Keylor Navas,36,GK,null,7
 158,Bryan Ruiz,37,SUB,null,7
 159,Óscar Esau Duarte Gaitán,33,CB,null,7
@@ -188,7 +182,6 @@
 180,Álvaro Zamora,21,SUB,null,7
 181,Anthony Hernández,29,SUB,null,7
 182,Roan Wilson,20,RES,null,7
-
 183,Luka Modrić,37,CM,null,8
 184,Marcelo Brozović,30,DM,null,8
 185,Mateo Kovačić,28,CM,null,8
@@ -215,7 +208,6 @@
 206,Ivica Ivušić,28,SUB,null,8
 207,Borna Barišić,30,SUB,null,8
 208,Josip Stanišić,23,SUB,null,8
-
 209,Pierre-Emile Højbjerg,27,CM,null,9
 210,Christian Eriksen,31,CAM,null,9
 211,Kasper Schmeichel,36,GK,null,9
@@ -242,7 +234,6 @@
 232,Jens Stryger Larsen,32,SUB,null,9
 233,Robert Skov,26,RES,null,9
 234,Oliver Christensen,24,SUB,null,9
-
 235,Pervis Estupiñán,25,LB,null,10
 236,Piero Hincapié,21,CB,null,10
 237,Gonzalo Plata,22,RM,null,10
