@@ -6,7 +6,7 @@
 
 ### python3 db_operations.py
 
-### python3 applications.py
+### python3 application.py
 
 ###
 
