@@ -4,9 +4,9 @@
 
 ## How to run:
 
-###
+### python3 db_operations.py
 
-###
+### python3 applications.py
 
 ###
 
