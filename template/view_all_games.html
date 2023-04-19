@@ -1,0 +1,47 @@
+<html>
+<title>View All Games</title>
+<h1>View All Games Played</h1>
+
+<a href="coach">Back</a>
+<br>
+<br>
+<form action = "{{ url_for('view_all_games') }}" method = "post">Choose GameID to view more: </a>
+
+  <br>
+<label for="gameID">
+  <i class="fas fa-user"></i>
+  </label>
+  <input type="text" name="gameID" placeholder="GameID" id="gameID" required>
+  <input type="submit" value='submit'>
+  <div class="msg">{{ msg }}</div>
+</form>
+
+<p>All Games</p>
+<table>
+  <thread>
+    <tr>
+      <th>GameID</th>
+      <th>Home Team ID</th>
+      <th>Team Name</th>
+      <th>Game Goals</th>
+      <th>Away Team ID</th>
+      <th>Team Name</th>
+      <th>Game Goals</th>
+    </tr>
+    <tbody>
+      {% for row in games %}
+      <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+        <td>{{row[2]}}</td>
+        <td>{{row[3]}}</td>
+        <td>{{row[4]}}</td>
+        <td>{{row[5]}}</td>
+        <td>{{row[6]}}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </thread>
+</table>
+
+</html>

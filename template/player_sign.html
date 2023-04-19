@@ -1,1 +1,21 @@
-Player Sign-In
+<html>
+<title> Player Sign-In </title>
+<h1>Player Login Page!</h1>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<form action = "{{ url_for('player_sign') }}" method = "post">Player Login</a>
+  <label for="playerID">
+    <i class="fas fa-user"></i>
+    </label>
+    <input type="text" name="playerID" placeholder="Player ID Number" id="playerID" required>
+    <label for="playerName">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input type="text" name="playerName" placeholder="Player Name" id="playerName" required>
+				<div class="msg">{{ msg }}</div>
+				<input type="submit" value="Login">
+      </form>
+
+  <a href='index'>Home</a>
+</html>

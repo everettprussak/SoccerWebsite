@@ -1,0 +1,20 @@
+<html>
+<title>Player Menu</title>
+<h1>Player Menu</h1>
+<h2>Hello, {{playerName }}. Your playerID is {{playerID }} </h2>
+<a href="index"> Home (LOGOUT) </a>
+<br>
+<br>
+<form action = "{{ url_for('players') }}" method = "post">Player Choices:</a>
+  <br>
+<select name="option" id="option">
+  <option value="games">View Games</option>
+  <option value="personal">Personal Stats</option>
+  <option value="each_game">Goals In Each Game</option>
+  <option value="leaders">League Leaders</option>
+</select>
+<br>
+<br>
+<input type="submit" value="submit">
+</form>
+</html>

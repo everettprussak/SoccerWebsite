@@ -1,0 +1,25 @@
+<html>
+<title>Each Game</title>
+<h1>Stats for each game player for {{playerName }}. </h1>
+
+<a href="players">Back</a>
+
+<p>Your Information</p>
+<table>
+  <thread>
+    <tr>
+      <th>GameID</th>
+      <th>Goals</th>
+    </tr>
+    <tbody>
+      {% for row in goals %}
+      <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </thread>
+</table>
+
+</html>

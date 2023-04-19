@@ -321,8 +321,51 @@ def restartTeamRecord():
     cursor.execute(query3)
     conn.commit()
 
+
+def createCoaches():
+    query = '''
+    INSERT INTO coach(name,wins,active)
+    VALUES
+        ('Steve Kerr',0,1),
+        ('Ty Lue',0,1),
+        ('Darvin Ham',0,1),
+        ('Quinn Snyder',0,1),
+        ('Jamahl Mosley',0,1),
+        ('Ime Udoka',0,1),
+        ('Erik Spoeltra',0,1),
+        ('Nick Nurse',0,1),
+        ('Stephen Silas',0,1)
+    ;
+    '''
+
+    cursor.execute(query)
+    conn.commit()
+
+
+def dropCoaches():
+    query = '''
+    DELETE FROM coach;
+    '''
+
+    cursor.execute(query)
+    conn.commit()
+
+def addCoachesToTeams():
+    list = [7,8,9,10,11,12,13,14,15]
+    list1 = [19,20,21,22,23,24,25,26,27]
+    for i in range(len(list)):
+        query = '''
+        UPDATE teams
+        SET coachID = %s
+        WHERE teamID = %s
+        ;
+        '''
+        a = list[i]
+        b = list1[i]
+        cursor.execute(query,(a,b,))
+        conn.commit()
 #deleteGoals()
-enterTeams()
+
 #createPlayerTable()
 #createTeamInfoTable()
 #createGameTable()
@@ -337,6 +380,14 @@ enterTeams()
 
 #restartTeamRecord()
 
+#enterTeams()
+
+#dropCoaches()
+#createCoaches()
+
+#addCoachesToTeams()
+
+
 query = '''
 SELECT COUNT(*)
 FROM game
@@ -345,9 +396,11 @@ AND homeScore > awayScore
 ;
 '''
 
+
+
 cursor.execute(query)
 records = cursor.fetchone()
-print(records[0])
+#print(records(0))
 
 print(conn)
 conn.close()

@@ -1,0 +1,27 @@
+<html>
+<title>View All Goals</title>
+<h1>Here is every goal that has been scored in the league!</h1>
+<a href='coach'>Back</a>
+
+<table>
+  <thread>
+    <tr>
+      <th>GameID</th>
+      <th>GoalID</th>
+      <th>Player Name</th>
+      <th>Team Name</th>
+    </tr>
+    <tbody>
+      {% for row in records %}
+      <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+        <td>{{row[2]}}</td>
+        <td>{{row[3]}}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </thread>
+</table>
+
+</html>

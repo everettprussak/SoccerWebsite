@@ -1,0 +1,29 @@
+<html>
+<h1> View Stats for {{teamName }} with teamID: {{teamID }}</h1>
+<a href="coach"> Home </a>
+<br>
+<a href="team_option"> Back </a>
+
+<br>
+<br>
+<table>
+  <tr>
+    <th>playerID</th>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Position</th>
+    <th>Goals</th>
+  </tr>
+  {% for row in data %}
+  <tr>
+    <td>{{row[0]}}</td>
+    <td>{{row[1]}}</td>
+    <td>{{row[2]}}</td>
+    <td>{{row[3]}}</td>
+    <td>{{row[4]}}</td>
+  </tr>
+  {% endfor %}
+
+</table>
+
+</html>

@@ -1,0 +1,27 @@
+<html>
+<h1> View Coaches</h1>
+<a href="coach"> Back </a>
+<br>
+<br>
+<table>
+  <tr>
+    <th>CoachID</th>
+    <th>Coach Name</th>
+    <th>Wins</th>
+    <th>Active</th>
+  </tr>
+  {% for row in coaches %}
+  <tr>
+    <td>{{row[0]}}</td>
+    <td>{{row[1]}}</td>
+    <td>{{row[2]}}</td>
+    <td>{{row[3]}}</td>
+    <td>{{row[4]}}</td>
+    <td>{{row[5]}}</td>
+    <td>{{row[6]}}</td>
+  </tr>
+  {% endfor %}
+
+</table>
+
+</html>

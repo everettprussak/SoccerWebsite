@@ -1,1 +1,21 @@
-Coach Sign-In
+<html>
+<title> Coach Sign-In </title>
+<h1>Coach Login Page!</h1>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<form action = "{{ url_for('coach_sign') }}" method = "post">Coach Login</a>
+  <label for="coachID">
+    <i class="fas fa-user"></i>
+    </label>
+    <input type="text" name="coachID" placeholder="Coach ID Number" id="coachID" required>
+    <label for="coachName">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input type="text" name="coachName" placeholder="Coach Name" id="coachName" required>
+				<div class="msg">{{ msg }}</div>
+				<input type="submit" value="Login">
+      </form>
+
+  <a href='index'>Home</a>
+</html>

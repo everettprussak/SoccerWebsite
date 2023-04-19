@@ -1,0 +1,41 @@
+<html>
+<title>Goals in this game!</title>
+<h1>Goals in GameID: {{gameID }}</h1>
+<a href='players'>Home</a>
+<br>
+<a href='view_games_player'>Back</a>
+<br>
+<br>
+<h2> {{teamID }}: {{homeScore}}</h2>
+<h2> {{otherID }}: {{awayScore}}</h2>
+
+<p>Goals for this game:</p>
+<table>
+  <thread>
+    <tr>
+      <th>gameID</th>
+      <th>goalID</th>
+      <th>playerID</th>
+      <th>Player Name</th>
+      <th>Team ID</th>
+      <th>Team City</th>
+      <th>Team Name</th>
+    </tr>
+    <tbody>
+      {% for row in goals %}
+      <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+        <td>{{row[2]}}</td>
+        <td>{{row[3]}}</td>
+        <td>{{row[4]}}</td>
+        <td>{{row[6]}}</td>
+        <td>{{row[5]}}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </thread>
+</table>
+
+
+</html>

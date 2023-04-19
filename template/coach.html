@@ -1,0 +1,20 @@
+<html>
+<title>Coach Menu</title>
+<h1>Coach Menu</h1>
+<a href="index"> Home (LOGOUT) </a>
+<h2>Hello, {{coachName }}. Your coachID is {{coachID }} </h2>
+
+<form action = "{{ url_for('coach') }}" method = "post">Coach Choices:</a>
+  <br>
+<select name="option" id="option">
+  <option value="league">View League Games</option>
+  <option value="team">Team Stats</option>
+  <option value="coaches">View Other Coaches</option>
+  <option value="standings">View Standings</option>
+  <option value="goals">View All Goals</option>
+</select>
+<br>
+<br>
+<input type="submit" value="submit">
+</form>
+</html>

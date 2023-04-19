@@ -25,9 +25,180 @@ app.secret_key = "SecretKey"
 def index():
     return render_template('index.html')
 
-@app.route("/coach_sign")
+@app.route("/coach_sign",methods=['GET','POST'])
 def coach_sign():
-    return render_template('coach_sign.html')
+        msg = ''
+        if request.method == 'POST':
+            coachID = request.form['coachID']
+            coachName = request.form['coachName']
+            cursor.execute('SELECT * FROM coach WHERE coachID = %s AND name = %s;', (coachID,coachName,))
+            record = cursor.fetchone()
+            if record:
+                session['coachID'] = coachID
+                session['coachName'] = coachName
+                return redirect(url_for('coach'))
+            else:
+                msg = 'Incorrect coachID/Name'
+        return render_template('coach_sign.html',msg=msg)
+
+
+@app.route("/coach",methods=['GET','POST'])
+def coach():
+    coachID = session['coachID']
+    coachName = session['coachName']
+    cursor.execute("SELECT * FROM teams WHERE coachID = %s;", (coachID,))
+    teamID = cursor.fetchone()[0]
+    session['teamID'] = teamID
+    if request.method == 'POST':
+        choice = request.form['option']
+        if(choice=='league'):
+            return redirect(url_for('view_all_games'))
+        elif(choice=='team'):
+            return redirect(url_for('team_option'))
+        elif(choice=='coaches'):
+            return redirect(url_for('view_coaches'))
+        elif(choice=='standings'):
+            return redirect(url_for('coach_standings'))
+        elif(choice=='goals'):
+            return redirect(url_for('goals'))
+    return render_template('coach.html',coachID=coachID,coachName=coachName)
+
+
+@app.route("/coach_standings")
+def coach_standings():
+        query = '''
+        SELECT *
+        FROM teams
+        ORDER BY wins DESC, totalGoals DESC
+        ;
+        '''
+
+        cursor.execute(query)
+        standings = cursor.fetchall()
+        place = 1
+        new_standings = []
+        for i in standings:
+            a = list(i)
+            a.append(place)
+            i = tuple(a)
+            place = place + 1
+            new_standings.append(a)
+
+
+        return render_template('coach_standings.html',standings=new_standings)
+
+@app.route("/goals")
+def goals():
+    query = '''
+    SELECT goal.gameID, goal.goalID, player.name, teams.teamName
+    FROM goal
+    JOIN player ON goal.playerID = player.playerID
+    JOIN teams ON teams.teamID = player.teamID
+    ORDER BY goal.gameID ASC;
+    '''
+
+    cursor.execute(query)
+    records = cursor.fetchall()
+    print(records)
+    return render_template('view_all_goals.html',records=records)
+
+
+@app.route("/team_option",methods=['GET','POST'])
+def team_option():
+    msg = ''
+    cursor.execute("SELECT * FROM teams;")
+    teams = cursor.fetchall()
+    if request.method == 'POST':
+        session['currentID'] = request.form['teamID']
+        teamID = session['currentID']
+        if teamID.isnumeric() == False:
+            msg = 'Incorrect. Try again!'
+        else:
+            found = False
+            for i in teams:
+                if int(teamID) == int(i[0]):
+                    found = True
+
+            if found:
+                return redirect(url_for('team_stats'))
+            else:
+                msg = 'Incorrect. Try again!'
+    return render_template('team_option.html',teams=teams,msg=msg)
+
+
+@app.route("/team_stats",methods=['GET','POST'])
+def team_stats():
+    currID = session['currentID']
+    print(currID)
+    cursor.execute("SELECT * FROM player WHERE teamID = %s;",(currID,))
+    players = cursor.fetchall()
+    return render_template('team_stats.html',data=players)
+
+
+@app.route("/view_coaches")
+def view_coaches():
+    cursor.execute('SELECT * FROM coach;')
+    coaches = cursor.fetchall()
+    return render_template('view_coaches.html',coaches=coaches)
+
+@app.route("/view_all_games",methods=['GET','POST'])
+def view_all_games():
+    msg = ''
+    query = '''
+    CREATE VIEW allGames AS
+    SELECT g.gameID, g.homeID, t1.teamName AS homeTeam, g.homeScore,g.awayID, t2.teamName AS awayTeam, g.awayScore
+    FROM game g
+    JOIN teams t1 ON g.homeID = t1.teamID
+    JOIN teams t2 ON g.awayID = t2.teamID
+    ;
+    '''
+
+    cursor.execute(query)
+
+    query = '''
+    SELECT *
+    FROM allGames;
+    '''
+
+    cursor.execute(query)
+    games = cursor.fetchall()
+
+    query = '''
+    DROP VIEW allGames;
+    '''
+    cursor.execute(query)
+
+    if request.method == 'POST':
+        gameID = request.form['gameID']
+        if gameID.isnumeric() == True:
+            found = False
+            for i in games:
+                if int(gameID) == int(i[0]):
+                    found = True
+
+            if found:
+                session['gameID'] = gameID
+                return redirect(url_for('view_game_info_coach'))
+            else:
+                msg = 'Incorrect GameID. Try again!'
+        else:
+            msg = 'Incorrect GameID. Try again!'
+
+    return render_template('view_all_games.html',games=games,msg=msg)
+
+
+@app.route("/view_game_info_coach",methods=['GET','POST'])
+def view_game_info_coach():
+    goals = getGoalsInfo(session['gameID'])
+    gameID = session['gameID']
+    game = getGameInfo(gameID)
+    teamID = teamName(game[1])[0]
+    otherID = teamName(game[2])[0]
+    homeScore = game[3]
+    awayScore = game[4]
+    return render_template('view_game_info_coach.html',goals=goals,gameID=session['gameID'],teamID=teamID,otherID=otherID,homeScore=homeScore,awayScore=awayScore)
+
+
 
 
 @app.route("/team_sign",methods=['GET','POST'])
@@ -51,11 +222,137 @@ def team_sign():
     # Show the login form with message (if any
     return render_template('team_sign.html', msg=msg)
 
-@app.route("/player_sign")
+@app.route("/player_sign",methods=['GET','POST'])
 def player_sign():
-    return render_template('player_sign.html')
+    msg = ''
+    if request.method == 'POST':
+        playerID = request.form['playerID']
+        playerName = request.form['playerName']
+        cursor.execute('SELECT * FROM player WHERE playerID = %s AND name = %s;', (playerID,playerName,))
+        record = cursor.fetchone()
+        if record:
+            session['playerID'] = playerID
+            session['playerName'] = playerName
+            return redirect(url_for('players'))
+        else:
+            msg = 'Incorrect playerID/Name'
+    return render_template('player_sign.html',msg=msg)
 
 
+@app.route("/players",methods=['GET','POST'])
+def players():
+    playerID = session['playerID']
+    playerName = session['playerName']
+    cursor.execute("SELECT * FROM player WHERE playerID = %s;",(playerID,))
+    records = cursor.fetchone()
+    session['teamID'] = records[5]
+    teamID = records[5]
+    if request.method == 'POST':
+        choice = request.form['option']
+        if(choice=='games'):
+            return redirect(url_for('view_games_player'))
+        elif(choice=='personal'):
+            return redirect(url_for('personal_stats'))
+        elif(choice=='each_game'):
+            return redirect(url_for('each_game'))
+        elif(choice=='leaders'):
+            return redirect(url_for('leaders'))
+    return render_template('players.html',playerName=playerName,playerID=playerID)
+
+
+@app.route("/leaders",methods=['GET','POST'])
+def leaders():
+    query = '''
+    SELECT player.playerID,player.name,player.goals,teams.teamName
+    FROM player
+    INNER JOIN teams
+    ON player.teamID = teams.teamID
+    ORDER BY goals DESC,playerID ASC
+    LIMIT 10;
+    '''
+
+    cursor.execute(query)
+    records = cursor.fetchall()
+    new_rankings = []
+    rank = 1
+    for i in records:
+        a = list(i)
+        a.append(rank)
+        new_rankings.append(a)
+        rank = rank + 1
+    return render_template('leaders.html',records=new_rankings)
+
+
+@app.route("/each_game",methods=['GET','POST'])
+def each_game():
+    playerID = session['playerID']
+    teamID = session['teamID']
+    playerName = session['playerName']
+
+    query = '''
+    SELECT g.gameID, IFNULL(COUNT(go.goalID), 0) AS goals_scored, g.homeID, g.awayID
+    FROM game g
+    LEFT JOIN (SELECT * FROM goal WHERE playerID = %s) go ON g.gameID = go.gameID
+    GROUP BY g.gameID
+    HAVING g.homeID = %s
+    OR g.awayID = %s
+    ;
+    '''
+
+    cursor.execute(query,(playerID,teamID,teamID,))
+    records = cursor.fetchall()
+    print(records)
+
+    return render_template('each_game.html',playerName=playerName,goals=records)
+
+@app.route("/personal_stats",methods=['GET','POST'])
+def personal_stats():
+    playerID = session['playerID']
+    teamID = session['teamID']
+    playerName = session['playerName']
+    cursor.execute("SELECT * FROM player WHERE playerID = %s",(playerID,))
+    stats = cursor.fetchall()
+    return render_template('personal_stats.html',playerName=playerName,stats=stats)
+
+@app.route("/view_games_player",methods=['GET','POST'])
+def view_games_player():
+    teamID = session['teamID']
+    games = viewGamesMore()
+    msg = ''
+    if len(games)==0:
+        msg = 'You do not have any Games Played!'
+    else:
+        if request.method == 'POST':
+            gameID = request.form['gameID']
+            if(gameID.isnumeric()==False):
+                msg = 'Incorrect. Try again!'
+            else:
+                gameID = int(gameID)
+                found = False
+                ind = 0
+                for i in games:
+                    if(i[0] == gameID):
+                        found = True
+                        break
+                    ind = ind + 1
+
+                if found:
+                    session['gameID'] = gameID
+                    return redirect(url_for('view_game_info_player'))
+
+    return render_template('view_games_player.html',games=games)
+
+
+@app.route("/view_game_info_player",methods=['GET','POST'])
+def view_game_info_player():
+    goals = getGoalsInfo(session['gameID'])
+    gameID = session['gameID']
+    game = getGameInfo(gameID)
+    teamID = teamName(game[1])[0]
+    otherID = teamName(game[2])[0]
+    homeScore = game[3]
+    awayScore = game[4]
+    return render_template('view_games_info_player.html',goals=goals,gameID=session['gameID'],teamID=teamID,otherID=otherID,homeScore=homeScore,awayScore=awayScore)
 
 @app.route("/teams",methods=['GET','POST'])
 def teams():
