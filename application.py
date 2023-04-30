@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, redirect, url_for, session
 
 import random
 import mysql.connector
+import csv
 
 #Make Connection
 conn = mysql.connector.connect(host="localhost",
@@ -481,6 +482,18 @@ def teams():
             return redirect(url_for('standings'))
         elif(team_choice=='delete_game'):
             return redirect(url_for('delete_game'))
+        elif(team_choice=='download'):
+            teamID = session['teamID']
+            with open('download.csv', 'w', newline='') as file:
+            # simple query to select all the players that have the teams teamID
+                cursor.execute('SELECT * FROM player WHERE teamID = ' + str(teamID) + ';')
+                teams = cursor.fetchall()
+                writer = csv.writer(file)
+                field = ["teamID", "teamName", "teamCity","wins","losses","totalGoals","coachID"]
+
+                writer.writerow(field)
+                for i in teams:
+                    writer.writerow(i)
 
 
     return render_template('teams.html',data=value,name=session['teamName'],teamID=session['teamID'])
@@ -579,6 +592,14 @@ def standings():
 
     cursor.execute(query)
     standings = cursor.fetchall()
+
+    cursor.execute("SHOW INDEX FROM teams WHERE Key_name = 'team_index'")
+    result = cursor.fetchone()
+
+    if result:
+        print('team_index already exists')
+    else:
+        cursor.execute("CREATE INDEX team_index ON teams (teamName)")
     place = 1
     new_standings = []
     for i in standings:
@@ -1052,6 +1073,25 @@ def updateTeamRecord(currID,totalWins,totalLoss):
     ;
     '''
 
+    query2 = '''
+    SELECT coachID
+    FROM teams
+    WHERE teamID = %s
+    ;
+    '''
+
+    cursor.execute(query2,(currID,))
+    coachID = cursor.fetchone()[0]
+
+    query3 = '''
+    UPDATE coach
+    SET wins = %s
+    WHERE coachID = %s
+    ;
+    '''
+
+    cursor.execute(query3,(totalWins,coachID,))
+    conn.commit()
     cursor.execute(query,(totalWins,currID,))
     conn.commit()
     cursor.execute(query1,(totalLoss,currID,))
@@ -1293,7 +1333,6 @@ def awayTeamScoreUpdate(team, game):
 if __name__ == "__main__":
     app.run(debug=True)
 #    session = {}
-
 
 print(conn)
 conn.close()

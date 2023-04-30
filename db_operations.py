@@ -364,6 +364,34 @@ def addCoachesToTeams():
         b = list1[i]
         cursor.execute(query,(a,b,))
         conn.commit()
+
+
+def practiceTransaction():
+    query = '''
+    START TRANSACTION;
+    UPDATE player
+    SET name = %s
+    WHERE playerID = %s
+    ;
+    SELECT COUNT(*) AFROM player WHERE name = %s;
+
+    '''
+
+    cursor.execute(query,('Kawhi T',23,))
+    conn.commit()
+
+
+def practiceTran():
+    query = '''
+    BEGIN TRANSACTION;
+    SELECT *
+    FROM teams;
+    END COMMIT;
+    '''
+
+    cursor.execute(query)
+    records = cursor.fetchall()
+
 #deleteGoals()
 
 #createPlayerTable()
@@ -386,8 +414,8 @@ def addCoachesToTeams():
 #createCoaches()
 
 #addCoachesToTeams()
-
-
+#conn.commit()
+#practiceTran()
 query = '''
 SELECT COUNT(*)
 FROM game
@@ -395,6 +423,22 @@ WHERE homeID = 5
 AND homeScore > awayScore
 ;
 '''
+
+import csv
+
+with open('practice.csv', 'w', newline='') as file:
+    query = '''
+    SELECT *
+    FROM teams;
+    '''
+    cursor.execute(query)
+    teams = cursor.fetchall()
+    writer = csv.writer(file)
+    field = ["teamID", "teamName", "teamCity","wins","losses","totalGoals","coachID"]
+
+    writer.writerow(field)
+    for i in teams:
+        writer.writerow(i)
 
 
 

@@ -4,7 +4,7 @@
 
 ## How to run:
 
-### python3 db_operations.py
+### python3 db_operations.py (plan on making schema, tables, and data with csv files)
 
 ### python3 application.py
 
@@ -21,7 +21,7 @@
 ## Project Details
 
 1. Print/display records from your database/tables.
-- Records are displayed on html
+- Records are displayed on html (players, standings, etc.)
 
 2. Query for data/results with various parameters/filters
 - A query for top ten goal scorers. A query for team standings.
@@ -36,16 +36,16 @@
 - Updating player totalGoals. Update team Wins, Losses, totalGoals.
 
 6. Make use of transactions (commit & rollback)
-- Need to do
+- Using 'COMMIT; and START TRANSACTION;' when using Python to connect with mysql database would throw errors. We spoke in class, but all of the commits for this project was similar to Project 4 and 5, by simply using commit(). There was no need for rollback in this project because the transactions all were checked and had to follow a flow to be able to insert or update data.
 
 7. Generate reports that can be exported (excel or csv format)
-- Need to do
+- When signed-in as team, there is an option in the home screen choices for 'Download Team Stats'. A csv file called 'download.csv' will be updated for whatever team chooses to download.
 
 8. One query must perform an aggregation/group-by clause
 - getGameGoals() and each_game()
 
 9. One query must contain a subquery.
-- each_game()?
+- each_game()
 
 10. Two queries must involve joins across at least 3 tables
 - getGoalsInfo() and goals()
@@ -55,7 +55,7 @@
 
 12. Include Database Views, Indexes
 - Database View in view_all_games().
-- Indexes: need to do.
+- Indexes in standings()
 
 13. Use at least 5 entities
 - 5 Entities (teams,player,coach,game,goal)

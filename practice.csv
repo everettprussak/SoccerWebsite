@@ -1,0 +1,10 @@
+teamID,teamName,teamCity,wins,losses,totalGoals,coachID
+7,Warriors,Golden State,13,3,0,19
+8,Clippers,Los Angeles,10,1,2,20
+9,Lakers,Los Angeles,9,2,1,21
+10,Hawks,Atlanta,7,1,1,22
+11,Magic,Orlando,13,2,1,23
+12,Celtics,Boston,12,2,1,24
+13,Heat,Miami,9,2,1,25
+14,Raptors,Toronto,4,0,2,26
+15,Rockets,Houston,8,0,4,27
