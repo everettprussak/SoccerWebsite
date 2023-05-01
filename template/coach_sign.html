@@ -1,21 +1,33 @@
+<!-- this is the creating of the page -->
 <html>
-<title> Coach Sign-In </title>
-<h1>Coach Login Page!</h1>
-
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-<form action = "{{ url_for('coach_sign') }}" method = "post">Coach Login</a>
-  <label for="coachID">
-    <i class="fas fa-user"></i>
-    </label>
-    <input type="text" name="coachID" placeholder="Coach ID Number" id="coachID" required>
-    <label for="coachName">
-					<i class="fas fa-lock"></i>
-				</label>
-				<input type="text" name="coachName" placeholder="Coach Name" id="coachName" required>
-				<div class="msg">{{ msg }}</div>
-				<input type="submit" value="Login">
-      </form>
-
-  <a href='index'>Home</a>
+  <!-- this is setting the backround color of the page -->
+  <body style="background-color:rgb(98, 102, 101);"> 
+    <!-- this it for the title for the page -->
+    <title> Coach Sign-In </title>
+    <!-- this centers and changes the color the title at the top of the page -->
+    <center><h1 style="font-size: 4rem; color: #c68824">Coach Login Page!</h1></center>
+    <!-- this is linking the page the a url -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- this creates the coach login text and changes the color as well as linking the folowing information to the URL -->
+    <center><form action = "{{ url_for('coach_sign') }}" style="font-size: 4rem; color: #c68824" method = "post">Coach Login</a>
+      <!-- this creates a box for the user to input there Coach ID and sets the color of the text -->
+      <label for="coachID">
+        <i class="fas fa-user"></i>
+      </label>
+      <input type="text" name="coachID" style="font-size: 3rem; color: #26ddd0" placeholder="CoachID Number" id="coachID" required>
+      <!-- this creates a box for the user to input there Coach Name and sets the color of the text -->
+      <label for="coachName">
+		  	<i class="fas fa-lock"></i>
+		  </label>
+		  <input type="text" name="coachName" style="font-size: 3rem; color: #26ddd0" placeholder="Coach Name" id="coachName" required>
+      <!-- changes the shape of the text boxes -->
+		  <div class="msg">{{ msg }}</div>
+      <!-- the br is a spacer for style and looks -->
+      <br>
+      <!-- this creates the submit button that brings the user to the -->
+		  <input type="submit" value="Login" style="font-size: 4rem; color: #36cc2e">
+    </form></center>
+    <!-- this creates a box for the user to return to the privous page -->
+    <center><a href='index' style="font-size: 3rem; color: #e61111">Home</a></center>
+  </body>
 </html>
