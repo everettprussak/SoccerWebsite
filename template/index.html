@@ -1,17 +1,34 @@
+<!-- this is the creating of the page  -->
 <html>
-
-<title> Soccer! </title>
-<h1>
-  Welcome to the Soccer Application of the Future!
-</h1>
-
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-<br>
-<a href="team_sign">Team Sign-In</a>
-<br>
-<a href="player_sign">Player Sign-In</a>
-<br>
-<a href="coach_sign">Coach Sign-In</a>
-
+  <!-- this is setting the backround color of the page  -->
+  <body style="background-color:rgb(244, 38, 38);"> 
+    <!-- this is the title that is  -->
+    <center><title>Soccer!</title></center>
+    <!-- this is sets the format and color of the text for the title  -->
+    <h1 style="font-size: 4rem; color: #000000">
+      <center>Welcome to the Soccer Application of the Future!</center>
+      <center>Here we focus on FIFA 2022!</center>
+    </h1>
+    <!-- this is linking the page the a url -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- the br 's are all spacers between the links for style and looks  -->
+    <br>
+    <br>
+    <!-- this is the team sign in link that is set to green and centered -->
+    <center><a href="team_sign" class="rectangle" style="font-size: 4rem; color: #36cc2e">Team Sign-In</a></center>
+    <br>
+    <br>
+    <!-- this is the player sign in link that is set to green and centered -->
+    <center><a href="player_sign" style="font-size: 4rem; color: #36cc2e">Player Sign-In</a></center>
+    <br>
+    <br>
+    <!-- this is the coach sign in link that is set to green and centered -->
+    <center><a href="coach_sign" style="font-size: 4rem; color: #36cc2e">Coach Sign-In</a></center>
+    <br>
+    <br>
+    <!-- this prints the image of a soccor ball by searching a website for a image -->
+    <a href="https://commons.wikimedia.org/wiki/File:Soccerball.svg">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Soccerball.svg">
+    </a>
+    </body>
 </html>
