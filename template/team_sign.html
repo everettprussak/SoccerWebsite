@@ -1,21 +1,33 @@
+<!-- this is the creating of the page -->
 <html>
-<title> Team Sign-In </title>
-<h1>Team Login Page!</h1>
-
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-<form action = "{{ url_for('team_sign') }}" method = "post">Team Login</a>
-  <label for="teamID">
-    <i class="fas fa-user"></i>
-    </label>
-    <input type="text" name="teamID" placeholder="TeamID Number" id="teamID" required>
-    <label for="teamName">
-					<i class="fas fa-lock"></i>
-				</label>
-				<input type="text" name="teamName" placeholder="Team Name" id="teamName" required>
-				<div class="msg">{{ msg }}</div>
-				<input type="submit" value="Login">
-      </form>
-
-  <a href='index'>Home</a>
+  <!-- this is setting the backround color of the page -->
+  <body style="background-color:rgb(98, 102, 101);"> 
+    <!-- this it for the title for the page -->
+    <title> Team Sign-In </title>
+    <!-- this centers and changes the color the title at the top of the page -->
+    <center><h1 style="font-size: 4rem; color: #c68824">Team Login Page!</h1></center>
+    <!-- this is linking the page the a url -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- this creates the team login text and changes the color as well as linking the folowing information to the URL -->
+    <center><form action = "{{ url_for('team_sign') }}" style="font-size: 4rem; color: #c68824" method = "post">Team Login</a>
+      <!-- this creates a box for the user to input there Team ID and sets the color of the text -->
+      <label for="teamID">
+        <i class="fas fa-user"></i>
+      </label>
+      <input type="text" name="teamID" style="font-size: 4rem; color: #26ddd0" placeholder="TeamID Number" id="teamID" required>
+      <!-- this creates a box for the user to input there Team Name and sets the color of the text -->
+      <label for="teamName">
+		  	<i class="fas fa-lock"></i>
+		  </label>
+		  <input type="text" name="teamName" style="font-size: 4rem; color: #26ddd0" placeholder="Team Name" id="teamName" required>
+      <!-- changes the shape of the text boxes -->
+		  <div class="msg">{{ msg }}</div>
+      <!-- the br is a spacer for style and looks -->
+      <br>
+      <!-- this creates the submit button that brings the user to the -->
+		  <input type="submit" value="Login" style="font-size: 4rem; color: #1f11e6">
+    </form></center>
+    <!-- this creates a box for the user to return to the privous page -->
+    <center><a href='index' style="font-size: 3rem; color: #e61111">Home</a></center>
+  </body>
 </html>
