@@ -359,9 +359,30 @@ def insertPlayers():
 
     conn.commit()
 
+
+def insertCoaches():
+    cursor.execute('''
+    INSERT INTO coach(coachID,name,wins,active)
+    VALUES
+        (1,'Lionel Scaloni',null,1),
+        (2,'Graham Arnold',null,1),
+        (3,'Roberto Martínez',null,1),
+        (4,'Tite',null,1),
+        (5,'Rigobert Song',null,1),
+        (6,'John Herdman',null,1),
+        (7,'Luis Fernando Suárez',null,1),
+        (8,'Zlatko Dalic',null,1),
+        (9,'Kasper Hjulmand',null,1),
+        (10,'Gustavo Alfaro',null,1)
+        ;
+    ''')
+
+    conn.commit()
+
 dropTables()
 first_run()
 insertTeams()
 insertPlayers()
+insertCoaches()
 print(conn)
 conn.close()
