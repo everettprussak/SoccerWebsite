@@ -268,7 +268,7 @@ def restartTeamRecord():
 
 def createCoaches():
     query = '''
-    INSERT INTO coach(coachID,name,wins,active)
+    INSERT INTO coach(coach_id, coach_name, coach_wins, active)
     VALUES
         (1,Lionel Scaloni,null,1),
         (2,Graham Arnold,null,1),
@@ -310,7 +310,7 @@ def createCoaches():
 
 def enterTeams():
     query = '''
-    INSERT INTO teams(teamName, teamCity, totalGoals, wins, losses)
+    INSERT INTO teams(team_id, team_name, team_city, team_goals, wins, loses, coach_id)
     VALUES 
         (1,Argentina,Buenos Aires,null,null,null,1),
         (2,Australia,Melbourne,null,null,null,2),
@@ -330,7 +330,7 @@ def enterTeams():
 
 def createPlayers():
     query = '''
-    INSERT INTO player(name,wins,active)
+    INSERT INTO player(player_id, player_name, player_age, Player_position, Player_goals, team_id)
     VALUES
         (1,Lionel Messi,35,RW,null,1),
         (2,Lautaro Martínez,25,ST,null,1),
