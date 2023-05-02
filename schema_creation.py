@@ -14,3 +14,6 @@ def first_run():
 
 
 first_run()
+
+print(conn)
+conn.close()

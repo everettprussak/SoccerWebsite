@@ -1,7 +1,8 @@
 teamID,teamName,teamCity,wins,losses,totalGoals,coachID
-30,Steph Curry,34,attacker,5,7
-31,Klay Thompson,31,middle,1,7
-38,Kevon Looney,28,defense,0,7
-39,Gary Payton II,30,defense,1,7
-40,Draymond Green,33,defense,0,7
-41,Jamychal Green,31,middle,3,7
+23,Kawhi T,32,defense,8,8
+24,Paul George,31,middle,0,8
+25,Bones Hyland,22,attacker,1,8
+26,Terance Mann,26,attacker,0,8
+27,Ivica Zubac,26,goalie,0,8
+28,Russell Westbrook,34,attacker,0,8
+29,Marcus Morris,32,middle,1,8
