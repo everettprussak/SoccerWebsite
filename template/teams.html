@@ -1,61 +1,61 @@
+<!-- this is the creating of the page -->
 <html>
-<h1> Hello, {{name }}. Here are the Team Details for the League! </h1>
-<h2>Your TeamID is: {{teamID }} </h2>
-<a href="index"> Home (LOGOUT) </a>
-<br>
-<br>
-<form action = "{{ url_for('teams') }}" method = "post">Team Choices:</a>
+  <!-- this is the title welcoming the team signed in -->
+  <center><h1 style="font-size: 4rem; color: #c68824"> Hello, {{name }}. Here are the Team Details for the League! </h1></center>
+  <center><h2 style="font-size: 3rem; color: #c68824">Your TeamID is: {{teamID }} </h2></center>
+  <!-- this is the link to return back to the home page -->
+  <a href="index"> Home (LOGOUT) </a>
+  <!-- spacing -->
   <br>
-<select name="option" id="option">
-  <option value="players">View Players</option>
-  <option value="add_player">Add Player</option>
-  <option value="games">View Games</option>
-  <option value="schedule">Schedule Match</option>
-  <option value="edit">Edit Match Statistics</option>
-  <option value="update">Update Team Info</option>
-  <option value="standings">View Standings</option>
-  <option value="delete_game">Delete Game</option>
-  <option value="download">Download Team Stats</option>
-</select>
-<br>
-<br>
-<input type="submit" value="submit">
-</form>
-
-
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<table>
-  <thread>
-    <tr>
-      <th>teamID</th>
-      <th>teamName</th>
-      <th>teamCity</th>
-      <th>totalGoals</th>
-      <th>wins</th>
-      <th>losses</th>
-      <th>coachID</th>
-    </tr>
-    <tbody>
-      {% for row in data %}
+  <br>
+  <center><form action = "{{ url_for('teams') }}" style="font-size: 4rem; color: #000000" method = "post">Team Choices:</a>
+    <!-- all the options for teams to veiw -->
+    <center><select name="option" id="option" style="font-size: 4rem; color: #9083ca">
+      <option value="players">View Players</option>
+      <option value="add_player">Add Player</option>
+      <option value="games">View Games</option>
+      <option value="schedule">Schedule Match</option>
+      <option value="edit">Edit Match Statistics</option>
+      <option value="update">Update Team Info</option>
+      <option value="standings">View Standings</option>
+      <option value="delete_game">Delete Game</option>
+      <option value="download">Download Team Stats</option>
+    </select></center>
+    <!-- spacing -->
+    <br>
+    <center><input style="font-size: 4rem; color: #9083ca" type="submit" value="submit"></center>
+  </form></center>
+  <!-- spacing -->
+  <br>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- print a table to display all the current teams -->
+  <center><table>
+    <thread>
       <tr>
-        <td>{{row[0]}}</td>
-        <td>{{row[1]}}</td>
-        <td>{{row[2]}}</td>
-        <td>{{row[3]}}</td>
-        <td>{{row[4]}}</td>
-        <td>{{row[5]}}</td>
-        <td>{{row[6]}}</td>
+        <th>teamID</th>
+        <th>teamName</th>
+        <th>teamCity</th>
+        <th>totalGoals</th>
+        <th>wins</th>
+        <th>losses</th>
+        <th>coachID</th>
       </tr>
-      {% endfor %}
+      <tbody>
+        {% for row in data %}
+        <tr>
+          <td>{{row[0]}}</td>
+          <td>{{row[1]}}</td>
+          <td>{{row[2]}}</td>
+          <td>{{row[3]}}</td>
+          <td>{{row[4]}}</td>
+          <td>{{row[5]}}</td>
+          <td>{{row[6]}}</td>
+        </tr>
+        {% endfor %}
       </tbody>
     </thread>
-</table>
-
-<br>
-<br>
-
-
-
-
-
+  </table></center>
+  <!-- spacing -->
+  <br>
+  <br>
 </html>
