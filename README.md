@@ -4,11 +4,20 @@
 
 ## How to run:
 
-### python3 db_operations.py (plan on making schema, tables, and data with csv files)
+### python3 scehma_creation.py (schema created)
+
+### python3 first_run.py (players, teams, and coaches inserted into tables)
 
 ### python3 application.py
 
-###
+### Go to the link provided (http://127.0.0.1:5000/index)
+
+### To sign-in with a team, you can look inside the WorkBench or simply start with the teamID of 1 and the teamName of Argentina. After that, all of the teams and their teamID will appear. You may sign-in with any of them.
+
+### For player Sign-In, use playerID 1 and Lionel Messi. Again, all of the other players may be signed in with.
+
+
+### For coach sign-in, you may again use any of the coaches, but coachID 1 and coach Name Lionel Scaloni is given.
 
 ## Issues we had:
 

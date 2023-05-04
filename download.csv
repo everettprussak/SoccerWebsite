@@ -1,8 +1,27 @@
 teamID,teamName,teamCity,wins,losses,totalGoals,coachID
-23,Kawhi T,32,defense,8,8
-24,Paul George,31,middle,0,8
-25,Bones Hyland,22,attacker,1,8
-26,Terance Mann,26,attacker,0,8
-27,Ivica Zubac,26,goalie,0,8
-28,Russell Westbrook,34,attacker,0,8
-29,Marcus Morris,32,middle,1,8
+1,Lionel Messi,35,RW,16,1
+2,Lautaro Martínez,25,ST,3,1
+3,Paulo Dybala,29,SUB,2,1
+4,Marcos Acuña,31,LB,1,1
+5,Ángel Di María,35,LW,1,1
+6,Alejandro Gómez,35,CM,1,1
+7,Emiliano Martínez,30,GK,,1
+8,Rodrigo Javier De Paul,28,CM,1,1
+9,Cristian Romero,24,CB,1,1
+10,Lisandro Martínez,25,SUB,1,1
+11,Gerónimo Rulli,30,SUB,1,1
+12,Guido Rodríguez,29,SUB,,1
+13,Nicolás Otamendi,35,CB,,1
+14,Nicolás Tagliafico,30,SUB,,1
+15,Enzo Fernández,22,SUB,,1
+16,Nicolás González,25,SUB,1,1
+17,Leandro Paredes,28,CDM,,1
+18,Joaquín Correa,28,SUB,,1
+19,Julián Álvarez,23,SUB,,1
+20,Juan Foyth,25,RES,1,1
+21,Gonzalo Montiel,26,SUB,,1
+22,Franco Armani,36,SUB,,1
+23,Nahuel Molina,25,RB,,1
+24,Exequiel Palacios,24,RES,,1
+25,Alexis Mac Allister,24,RES,,1
+26,Germán Pezzella,31,SUB,,1
