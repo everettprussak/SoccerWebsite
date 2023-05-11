@@ -1,47 +1,52 @@
+<!-- this is the creating of the page -->
 <html>
-<title>View All Games</title>
-<h1>View All Games Played</h1>
-
-<a href="coach">Back</a>
-<br>
-<br>
-<form action = "{{ url_for('view_all_games') }}" method = "post">Choose GameID to view more: </a>
-
-  <br>
-<label for="gameID">
-  <i class="fas fa-user"></i>
-  </label>
-  <input type="text" name="gameID" placeholder="GameID" id="gameID" required>
-  <input type="submit" value='submit'>
-  <div class="msg">{{ msg }}</div>
-</form>
-
-<p>All Games</p>
-<table>
-  <thread>
-    <tr>
-      <th>GameID</th>
-      <th>Home Team ID</th>
-      <th>Team Name</th>
-      <th>Game Goals</th>
-      <th>Away Team ID</th>
-      <th>Team Name</th>
-      <th>Game Goals</th>
-    </tr>
-    <tbody>
-      {% for row in games %}
-      <tr>
-        <td>{{row[0]}}</td>
-        <td>{{row[1]}}</td>
-        <td>{{row[2]}}</td>
-        <td>{{row[3]}}</td>
-        <td>{{row[4]}}</td>
-        <td>{{row[5]}}</td>
-        <td>{{row[6]}}</td>
-      </tr>
-      {% endfor %}
-      </tbody>
-    </thread>
-</table>
-
+  <!-- this is setting the backround color of the page -->
+  <body style="background-color:rgb(159, 214, 231);"> 
+    <!-- this is for the title -->
+    <title>View All Games</title>
+    <center><h1 style="font-size: 3rem; color: #000000"> View All Games Played </h1></center>
+    <!-- this is a button for returning to the privouse page -->
+    <a href="coach" style="font-size: 2rem; color: #ff0000">Back</a>
+    <!-- the br 's are all spacers for style and looks -->
+    <br>
+    <br>
+    <!-- This creates a box for users to insert a gameID and seem more about it -->
+    <center><form style="font-size: 2rem; color: #000000" action = "{{ url_for('view_all_games') }}" method = "post">Choose GameID to view more: </a>
+      <br>
+      <label for="gameID">
+        <i class="fas fa-user"></i>
+      </label>
+      <input style="font-size: 2rem; color: #000000" type="text" name="gameID" placeholder="GameID" id="gameID" required>
+      <input style="font-size: 2rem; color: #000000" type="submit" value='submit'>
+      <div class="msg">{{ msg }}</div>
+    </form></center>
+    <!-- Creates a table with all current games information -->
+    <center><p style="font-size: 2rem; color: #000000" >All Games</p></center>
+    <center><table style="font-size: 2rem; color: #000000" >
+      <thread>
+        <tr>
+          <th>GameID</th>
+          <th>Home Team ID</th>
+          <th>Team Name</th>
+          <th>Game Goals</th>
+          <th>Away Team ID</th>
+          <th>Team Name</th>
+          <th>Game Goals</th>
+        </tr>
+        <tbody>
+          {% for row in games %}
+          <tr>
+            <td>{{row[0]}}</td>
+            <td>{{row[1]}}</td>
+            <td>{{row[2]}}</td>
+            <td>{{row[3]}}</td>
+            <td>{{row[4]}}</td>
+            <td>{{row[5]}}</td>
+            <td>{{row[6]}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </thread>
+    </table></center>
+  </body>
 </html>
