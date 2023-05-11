@@ -1,25 +1,29 @@
+<!-- this is the creating of the page -->
 <html>
-<title>Each Game</title>
-<h1>Stats for each game player for {{playerName }}. </h1>
-
-<a href="players">Back</a>
-
-<p>Your Information</p>
-<table>
-  <thread>
-    <tr>
-      <th>GameID</th>
-      <th>Goals</th>
-    </tr>
-    <tbody>
-      {% for row in goals %}
-      <tr>
-        <td>{{row[0]}}</td>
-        <td>{{row[1]}}</td>
-      </tr>
-      {% endfor %}
-      </tbody>
-    </thread>
-</table>
-
+  <!-- this is setting the backround color of the page -->
+  <body style="background-color:rgb(159, 214, 231);"> 
+    <title>Each Game</title>
+    <!-- this is for the title -->
+    <center><h1 style="font-size: 3rem; color: #000000">Stats for each game player for {{playerName }}. </h1></center>
+    <!-- this is a button for returning to the privouse page -->  
+    <a href="players"  style="font-size: 2rem; color: #ff0000">Back</a>
+    <center><p style="font-size: 2rem; color: #000000">Your Information</p></center>
+    <!-- Creates a table with all goals in each game -->
+    <center><table style="font-size: 2rem; color: #000000">
+      <thread>
+        <tr>
+          <th>GameID</th>
+          <th>Goals</th>
+        </tr>
+        <tbody>
+          {% for row in goals %}
+          <tr>
+            <td>{{row[0]}}</td>
+            <td>{{row[1]}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </thread>
+    </table></center>
+  </body> 
 </html>
