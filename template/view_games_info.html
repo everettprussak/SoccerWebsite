@@ -1,41 +1,49 @@
+<!-- this is the creating of the page -->
 <html>
-<title>Goals in this game!</title>
-<h1>Goals in GameID: {{gameID }}</h1>
-<a href='teams'>Home</a>
-<br>
-<a href='view_games'>Back</a>
-<br>
-<br>
-<h2> {{teamID }}: {{homeScore}}</h2>
-<h2> {{otherID }}: {{awayScore}}</h2>
-
-<p>Goals for this game:</p>
-<table>
-  <thread>
-    <tr>
-      <th>gameID</th>
-      <th>goalID</th>
-      <th>playerID</th>
-      <th>Player Name</th>
-      <th>Team ID</th>
-      <th>Team City</th>
-      <th>Team Name</th>
-    </tr>
-    <tbody>
-      {% for row in goals %}
-      <tr>
-        <td>{{row[0]}}</td>
-        <td>{{row[1]}}</td>
-        <td>{{row[2]}}</td>
-        <td>{{row[3]}}</td>
-        <td>{{row[4]}}</td>
-        <td>{{row[6]}}</td>
-        <td>{{row[5]}}</td>
-      </tr>
-      {% endfor %}
-      </tbody>
-    </thread>
-</table>
-
-
+  <!-- this is setting the backround color of the page -->
+  <body style="background-color:rgb(159, 214, 231);"> 
+    <!-- this is for the title -->
+    <title>Goals in this game!</title>
+    <center><h1 style="font-size: 3rem; color: #000000">Goals in GameID: {{gameID }}</h1></center>
+    <!-- this is the link to return back to the home page -->
+    <a href='teams' style="font-size: 2rem; color: #ff0000">Home</a>
+    <!-- the br 's are all spacers for style and looks -->
+    <br>
+    <br>
+    <!-- this is the link to return back to the previous page -->
+    <a href='view_games' style="font-size: 2rem; color: #ff0000">Back</a>
+    <!-- the br 's are all spacers for style and looks -->
+    <br>
+    <br>
+    <center><h2 style="font-size: 2rem; color: #000000"> {{teamID }}: {{homeScore}}</h2></center>
+    <center><h2 style="font-size: 2rem; color: #000000"> {{otherID }}: {{awayScore}}</h2></center>
+    <!-- Creates a table with all relavant information of a game -->
+    <center><p style="font-size: 2rem; color: #000000">Goals for this game:</p></center>
+    <center><table style="font-size: 2rem; color: #000000">
+      <thread>
+        <tr>
+          <th>gameID</th>
+          <th>goalID</th>
+          <th>playerID</th>
+          <th>Player Name</th>
+          <th>Team ID</th>
+          <th>Team City</th>
+          <th>Team Name</th>
+        </tr>
+        <tbody>
+          {% for row in goals %}
+          <tr>
+            <td>{{row[0]}}</td>
+            <td>{{row[1]}}</td>
+            <td>{{row[2]}}</td>
+            <td>{{row[3]}}</td>
+            <td>{{row[4]}}</td>
+            <td>{{row[6]}}</td>
+            <td>{{row[5]}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </thread>
+    </table></center>
+  </body>
 </html>
