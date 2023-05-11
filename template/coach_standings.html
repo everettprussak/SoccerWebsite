@@ -1,34 +1,39 @@
+<!-- this is the creating of the page -->
 <html>
-<title>Team Standings</title>
-<h1>Here are the standings for this league</h1>
-<a href='coach'>Back</a>
-<p>The standings are sorted by Total Wins First, then total Goals, then TeamID if those are both the same.</p>
-
-<table>
-  <thread>
-    <tr>
-      <th>Place</th>
-      <th>teamID</th>
-      <th>Team Name</th>
-      <th>Team City</th>
-      <th> Wins </th>
-      <th>Losses</th>
-      <th>Total Goals</th>
-    </tr>
-    <tbody>
-      {% for row in standings %}
-      <tr>
-        <td>{{row[7]}}</td>
-        <td>{{row[0]}}</td>
-        <td>{{row[1]}}</td>
-        <td>{{row[2]}}</td>
-        <td>{{row[4]}}</td>
-        <td>{{row[5]}}</td>
-        <td>{{row[3]}}</td>
-      </tr>
-      {% endfor %}
-      </tbody>
-    </thread>
-</table>
-
+  <!-- this is setting the backround color of the page -->
+  <body style="background-color:rgb(159, 214, 231);"> 
+    <!-- this is for the title -->
+    <title>Team Standings</title>
+    <center><h1 style="font-size: 3rem; color: #000000">Here are the standings for this league</h1></center>
+    <!-- this is a button for returning to the privouse page -->
+    <a href='coach' style="font-size: 2rem; color: #ff0000">Back</a>
+    <!-- Creates a table with all current standings of the league -->
+    <center><p style="font-size: 2rem; color: #000000">The standings are sorted by Total Wins First, then total Goals, then TeamID if those are both the same.</p></center>
+    <center><table style="font-size: 2rem; color: #000000">
+      <thread>
+        <tr>
+          <th>Place</th>
+          <th>teamID</th>
+          <th>Team Name</th>
+          <th>Team City</th>
+          <th> Wins </th>
+          <th>Losses</th>
+          <th>Total Goals</th>
+        </tr>
+        <tbody>
+          {% for row in standings %}
+          <tr>
+            <td>{{row[7]}}</td>
+            <td>{{row[0]}}</td>
+            <td>{{row[1]}}</td>
+            <td>{{row[2]}}</td>
+            <td>{{row[4]}}</td>
+            <td>{{row[5]}}</td>
+            <td>{{row[3]}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </thread>
+    </table></center>
+  </body>
 </html>
