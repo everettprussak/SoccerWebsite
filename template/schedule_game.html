@@ -1,26 +1,27 @@
+<!-- this is the creating of the page -->
 <html>
-<h1>Schedule Match</h1>
-<a href="teams"> Back </a>
-<br>
-<br>
-
-<form action = "{{ url_for('schedule_game') }}" method = "post">Pick Away TeamID!</a>
-
+  <!-- this is setting the backround color of the page -->
+  <body style="background-color:rgb(159, 214, 231);"> 
+   <!-- this is for the title -->
+  <center><h1 style="font-size: 3rem; color: #000000">Schedule Match</h1></center>
+  <!-- this is a button for returning to the privouse page -->
+  <a href="teams" style="font-size: 2rem; color: #ff0000"> Back </a>
+  <!-- the br 's are all spacers for style and looks -->
   <br>
-
-  <label for="awayID">
-    <i class="fas fa-user"></i>
+  <br>
+  <!-- makes a box for user to type the team they want to schedual against -->
+  <center><form action = "{{ url_for('schedule_game') }}" style="font-size: 4rem; color: #000000" method = "post">Pick Away TeamID!</a>
+    <br>
+    <label for="awayID">
+      <i class="fas fa-user"></i>
     </label>
-    <input type="text" name="awayID" placeholder="TeamID" id="awayID" required>
-
-
-      <input type="submit" value="Continue">
-      <div class="msg">{{ msg }}</div>
-  </form>
-
+    <input style="font-size: 2rem; color: #000000" type="text" name="awayID" placeholder="TeamID" id="awayID" required>
+    <input style="font-size: 2rem; color: #000000" type="submit" value="Continue">
+    <div class="msg">{{ msg }}</div>
+  </form></center>
   <br>
-
-<table>
+  <!-- displays a table for the user to see current teams minus your own team -->
+  <center><table>
   <thread>
     <tr>
       <th>teamID</th>
@@ -44,6 +45,11 @@
       </tr>
       {% endfor %}
       </tbody>
+    </thread>
+  </table></center>
+  </body>
+</html>
+
     </thread>
 </table>
 
