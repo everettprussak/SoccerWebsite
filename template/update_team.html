@@ -1,23 +1,25 @@
+<!-- this is the creating of the page -->
 <html>
-<title>Update Team</title>
-<a href='teams'>Back</a>
-<h1>Update your Team Name or Team City!</h1>
-
-<form action = "{{ url_for('update_team') }}" method = "post">Choose GameID to view more: </a>
-
-  <br>
-
-  <label for="name">
-    <i class="fas fa-user"></i>
-    </label>
-    <input type="text" name="name" placeholder="Team Name" id="name" required>
-
-  <label for="city">
-      <i class="fas fa-user"></i>
+  <!-- this is setting the backround color of the page -->
+  <body style="background-color:rgb(159, 214, 231);"> 
+    <!-- this is for the title -->
+    <title>Update Team</title>
+    <center><h1 style="font-size: 3rem; color: #000000"> Update Team</h1></center>
+    <!-- this is a button for returning to the privouse page -->
+    <a href='teams' style="font-size: 2rem; color: #ff0000">Back</a>
+    <!-- creates boxes for the user to update a team name / city -->
+    <center><h1>Update your Team Name or Team City!</h1></center>
+    <center><form style="font-size: 2rem; color: #000000" action = "{{ url_for('update_team') }}" method = "post">Choose GameID to view more: </a>
+      <br>
+      <label for="name">
+        <i class="fas fa-user"></i>
       </label>
-      <input type="text" name="city" placeholder="Team City" id="city" required>
-
-    <input type="submit" value='submit'>
-  </form>
-
+      <input style="font-size: 2rem; color: #000000" type="text" name="name" placeholder="Team Name" id="name" required>
+      <label for="city">
+          <i class="fas fa-user"></i>
+      </label>
+      <input style="font-size: 2rem; color: #000000" type="text" name="city" placeholder="Team City" id="city" required>
+      <input style="font-size: 2rem; color: #000000" type="submit" value='submit'>
+    </form></center>
+  </body>
 </html>
