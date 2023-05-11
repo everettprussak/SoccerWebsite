@@ -1,32 +1,36 @@
+<!-- this is the creating of the page -->
 <html>
-<title>Player Addition</title>
-<h1>Adding Player to Roster</h1>
-<a href='teams'>Back</a>
-<br>
-<br>
-<form action = "{{ url_for('add_player') }}" method = "post">Add Player!</a>
-  <br>
-  <br>
-  <label for="name">
-    <i class="fas fa-user"></i>
-    </label>
-    <input type="text" name="name" placeholder="Player Name" id="name" required>
-
-  <label for="age">
-      <i class="fas fa-user"></i>
+  <!-- this is setting the backround color of the page -->
+  <body style="background-color:rgb(159, 214, 231);"> 
+    <!-- this is for the title -->
+    <title>Player Addition</title>
+    <center><h1 style="font-size: 3rem; color: #000000">Adding Player to Roster</h1></center>
+    <!-- this is a button for returning to the privouse page -->
+    <a href='teams' style="font-size: 2rem; color: #ff0000">Back</a>
+    <!-- the br 's are all spacers for style and looks -->
+    <br>
+    <br>
+    <!-- creates text boxes for the user to adda player -->
+    <center><form style="font-size: 3rem; color: #000000" action = "{{ url_for('add_player') }}" method = "post">Add Player!</a>
+      <br>
+      <br>
+      <label for="name">
+        <i class="fas fa-user"></i>
       </label>
-      <input type="text" name="age" placeholder="Player Age" id="age" required>
-
-    <select name="option" id="option">
-      <option value="goalie">Goalie</option>
-      <option value="attacker">Attacker</option>
-      <option value="middle">Midfield</option>
-      <option value="defense">Defender</option>
-    </select>
-
-    <div class="msg">{{ msg }}</div>
-
-    <input type="submit" value="Add">
-  </form>
-
+      <input style="font-size: 2rem; color: #000000" type="text" name="name" placeholder="Player Name" id="name" required>
+      <label for="age">
+        <i class="fas fa-user"></i>
+      </label>
+      <input style="font-size: 2rem; color: #000000" type="text" name="age" placeholder="Player Age" id="age" required>
+      <select style="font-size: 2rem; color: #000000" name="option" id="option">
+        <option value="goalie">Goalie</option>
+        <option value="attacker">Attacker</option>
+        <option value="middle">Midfield</option>
+        <option value="defense">Defender</option>
+      </select>
+      <div style="font-size: 2rem; color: #000000" class="msg">{{ msg }}</div>
+      <br>
+      <input style="font-size: 2rem; color: #000000" type="submit" value="Add">
+    </form></center>
+  </body>
 </html>
