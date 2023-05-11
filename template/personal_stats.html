@@ -1,31 +1,35 @@
+<!-- this is the creating of the page -->
 <html>
-<title>Personal Stats</title>
-<h1>Stats for {{playerName }}.</h1>
-<a href="players">Back</a>
-
-
-<p>Your Information</p>
-<table>
-  <thread>
-    <tr>
-      <th>PlayerID</th>
-      <th>Goals</th>
-      <th>Age</th>
-      <th>Position</th>
-      <th>TeamID</th>
-    </tr>
-    <tbody>
-      {% for row in stats %}
-      <tr>
-        <td>{{row[0]}}</td>
-        <td>{{row[4]}}</td>
-        <td>{{row[2]}}</td>
-        <td>{{row[3]}}</td>
-        <td>{{row[5]}}</td>
-      </tr>
-      {% endfor %}
-      </tbody>
-    </thread>
-</table>
-
+  <!-- this is setting the backround color of the page -->
+  <body style="background-color:rgb(159, 214, 231);"> 
+    <title>Personal Stats</title>
+    <!-- this is for the title -->
+    <center><h1 style="font-size: 3rem; color: #000000">Stats for {{playerName }}.</h1></center>
+    <!-- this is the link to return back to the previous page -->
+    <a href="players" style="font-size: 2rem; color: #ff0000">Back</a>
+    <center><p style="font-size: 3rem; color: #000000">Your Information</p></center>
+    <!-- Creates a table with all relavant information of a player -->
+    <center><table style="font-size: 2rem; color: #000000">
+      <thread>
+        <tr>
+          <th>PlayerID</th>
+          <th>Goals</th>
+          <th>Age</th>
+          <th>Position</th>
+          <th>TeamID</th>
+        </tr>
+        <tbody>
+          {% for row in stats %}
+          <tr>
+            <td>{{row[0]}}</td>
+            <td>{{row[4]}}</td>
+            <td>{{row[2]}}</td>
+            <td>{{row[3]}}</td>
+            <td>{{row[5]}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </thread>
+    </table></center>
+  </body>
 </html>
