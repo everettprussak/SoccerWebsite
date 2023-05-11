@@ -1,5 +1,7 @@
 <!-- this is the creating of the page -->
 <html>
+  <!-- this is setting the backround color of the page -->
+  <body style="background-color:rgb(159, 214, 231);"> 
   <!-- this is the title welcoming the team signed in -->
   <center><h1 style="font-size: 4rem; color: #c68824"> Hello, {{name }}. Here are the Team Details for the League! </h1></center>
   <center><h2 style="font-size: 3rem; color: #c68824">Your TeamID is: {{teamID }} </h2></center>
@@ -8,9 +10,10 @@
   <!-- spacing -->
   <br>
   <br>
+  <!-- creates a selection text box-->
   <center><form action = "{{ url_for('teams') }}" style="font-size: 4rem; color: #000000" method = "post">Team Choices:</a>
     <!-- all the options for teams to veiw -->
-    <center><select name="option" id="option" style="font-size: 1rem; color: #1f11e6">
+    <center><select name="option" id="option" style="font-size: 3rem; color: #000000">
       <option value="players">View Players</option>
       <option value="add_player">Add Player</option>
       <option value="games">View Games</option>
@@ -23,7 +26,7 @@
     </select></center>
     <!-- spacing -->
     <br>
-    <center><input style="font-size: 2rem; color: #1f11e6" type="submit" value="submit"></center>
+    <center><input style="font-size: 3rem; color: #000000" type="submit" value="submit"></center>
   </form></center>
   <!-- spacing -->
   <br>
@@ -58,4 +61,5 @@
   <!-- spacing -->
   <br>
   <br>
+</body> 
 </html>
