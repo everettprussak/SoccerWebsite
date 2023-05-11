@@ -1,48 +1,55 @@
+<!-- this is the creating of the page -->
 <html>
-<title>Delete Game</title>
-<h1>Select a GameID to delete</h1>
+  <!-- this is setting the backround color of the page -->
+  <body style="background-color:rgb(159, 214, 231);"> 
+    <!-- this is for the title -->
+    <title>Delete Game</title>
+    <center><h1 style="font-size: 3rem; color: #000000"> Delete Game </h1></center>
+    <center><h1 style="font-size: 2rem; color: #000000">Select a GameID to delete</h1></center>
+    <!-- this is a button for returning to the privouse page -->
+    <a href='teams' style="font-size: 2rem; color: #ff0000">Back</a>
+    <!-- the br 's are all spacers for style and looks -->    
+    <br>
+    <br>
+<!-- This creates a box for users to insert a gameID and remove it -->
+    <center><form style="font-size: 2rem; color: #000000" action = "{{ url_for('delete_game') }}" method = "post">Choose GameID to Delete: </a>
+      <br>
+      <label for="gameID">
+        <i class="fas fa-user"></i>
+      </label>
+      <input style="font-size: 2rem; color: #000000" type="text" name="gameID" placeholder="GameID" id="gameID" required>
+      <input style="font-size: 2rem; color: #000000" type="submit" value='submit'>
+      <div class="msg">{{ msg }}</div>
+    </form></center>
+    <!-- Creates a table with all relavant information on games -->
+    <center><table style="font-size: 2rem; color: #000000">
+      <thread>
+        <tr>
+          <th>gameID</th>
+          <th>homeID</th>
+          <th>Team Name</th>
+          <th>Home Score</th>
+          <th>awayID </th>
+          <th>Team Name</th>
+          <th>Away Score</th>
+        </tr>
+        <tbody>
+        {% for row in games %}
+          <tr>
+            <td>{{row[0]}}</td>
+            <td>{{row[1]}}</td>
+            <td>{{row[2]}}</td>
+            <td>{{row[3]}}  </td>
+            <td>{{row[4]}}</td>
+            <td>{{row[5]}}</td>
+            <td>{{row[6]}}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </thread>
+    </table></center>
+  </body>
+</html>
 
-<a href='teams'>Back</a>
-<br>
-<br>
-<form action = "{{ url_for('delete_game') }}" method = "post">Choose GameID to Delete: </a>
-
-  <br>
-
-  <label for="gameID">
-    <i class="fas fa-user"></i>
-    </label>
-    <input type="text" name="gameID" placeholder="GameID" id="gameID" required>
-
-    <input type="submit" value='submit'>
-    <div class="msg">{{ msg }}</div>
-  </form>
-
-<table>
-  <thread>
-    <tr>
-      <th>gameID</th>
-      <th>homeID</th>
-      <th>Team Name</th>
-      <th>Home Score</th>
-      <th>awayID </th>
-      <th>Team Name</th>
-      <th>Away Score</th>
-    </tr>
-    <tbody>
-      {% for row in games %}
-      <tr>
-        <td>{{row[0]}}</td>
-        <td>{{row[1]}}</td>
-        <td>{{row[2]}}</td>
-        <td>{{row[3]}}  </td>
-        <td>{{row[4]}}</td>
-        <td>{{row[5]}}</td>
-        <td>{{row[6]}}</td>
-      </tr>
-      {% endfor %}
-      </tbody>
-    </thread>
-</table>
 
 </html>
