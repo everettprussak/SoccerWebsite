@@ -1,47 +1,53 @@
+<!-- this is the creating of the page -->
 <html>
-<title>View Games</title>
-<a href='players'>Back</a>
-<br>
-<br>
-<form action = "{{ url_for('view_games_player') }}" method = "post">Choose GameID to view more: </a>
-
-  <br>
-
-  <label for="gameID">
-    <i class="fas fa-user"></i>
-    </label>
-    <input type="text" name="gameID" placeholder="GameID" id="gameID" required>
-    <input type="submit" value='submit'>
-    <div class="msg">{{ msg }}</div>
-  </form>
-
-
-<p>Your Games</p>
-<table>
-  <thread>
-    <tr>
-      <th>gameID</th>
-      <th>homeID</th>
-      <th>homeTeam</th>
-      <th>homeScore</th>
-      <th>awayID</th>
-      <th>awayTeam</th>
-      <th>awayScore</th>
-    </tr>
-    <tbody>
-      {% for row in games %}
-      <tr>
-        <td>{{row[0]}}</td>
-        <td>{{row[1]}}</td>
-        <td>{{row[2]}}</td>
-        <td>{{row[3]}}</td>
-        <td>{{row[4]}}</td>
-        <td>{{row[5]}}</td>
-        <td>{{row[6]}}</td>
-      </tr>
-      {% endfor %}
-      </tbody>
-    </thread>
-</table>
-
+  <!-- this is setting the backround color of the page -->
+  <body style="background-color:rgb(159, 214, 231);"> 
+    <!-- this is for the title -->
+    <title>View Games</title>
+    <center><h1 style="font-size: 3rem; color: #000000"> View Games</h1></center>
+    <!-- this is the link to return back to the previous page -->
+    <a href='players' style="font-size: 2rem; color: #ff0000">Back</a>
+    <!-- the br 's are all spacers for style and looks -->
+    <br>
+    <br>
+    <!-- This creates a box for users to insert a gameID and get that games information -->
+    <center><form action = "{{ url_for('view_games_player') }}" method = "post">Choose GameID to view more: </a>
+      <br>
+      <label for="gameID">
+        <i class="fas fa-user"></i>
+      </label>
+      <input style="font-size: 2rem; color: #000000" type="text" name="gameID" placeholder="GameID" id="gameID" required>
+      <input style="font-size: 2rem; color: #000000" type="submit" value='submit'>
+      <div class="msg">{{ msg }}</div>
+    </form></center>
+    <center><p style="font-size: 2rem; color: #000000">Your Games</p></center>
+    <!-- Creates a table with all relavant information of a game -->
+    <center><table>
+      <thread>
+        <tr>
+          <th>gameID</th>
+          <th>homeID</th>
+          <th>homeTeam</th>
+          <th>homeScore</th>
+          <th>awayID</th>
+          <th>awayTeam</th>
+          <th>awayScore</th>
+        </tr>
+        <tbody>
+          {% for row in games %}
+          <tr>
+            <td>{{row[0]}}</td>
+            <td>{{row[1]}}</td>
+            <td>{{row[2]}}</td>
+            <td>{{row[3]}}</td>
+            <td>{{row[4]}}</td>
+            <td>{{row[5]}}</td>
+            <td>{{row[6]}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </thread>
+    </table></center>
+  </body>
 </html>
+
