@@ -1,27 +1,33 @@
+<!-- this is the creating of the page -->
 <html>
-<h1> View Coaches</h1>
-<a href="coach"> Back </a>
-<br>
-<br>
-<table>
-  <tr>
-    <th>CoachID</th>
-    <th>Coach Name</th>
-    <th>Wins</th>
-    <th>Active</th>
-  </tr>
-  {% for row in coaches %}
-  <tr>
-    <td>{{row[0]}}</td>
-    <td>{{row[1]}}</td>
-    <td>{{row[2]}}</td>
-    <td>{{row[3]}}</td>
-    <td>{{row[4]}}</td>
-    <td>{{row[5]}}</td>
-    <td>{{row[6]}}</td>
-  </tr>
-  {% endfor %}
-
-</table>
-
+  <!-- this is setting the backround color of the page -->
+  <body style="background-color:rgb(159, 214, 231);"> 
+    <!-- this is for the title -->
+    <center><h1 style="font-size: 3rem; color: #000000"> View Coaches </h1></center>
+    <!-- this is a button for returning to the privouse page -->
+    <a href="coach" style="font-size: 2rem; color: #ff0000"> Back </a>
+    <!-- the br 's are all spacers for style and looks -->
+    <br>
+    <br>
+    <!-- Creates a table with all current coaches -->
+    <center><table>
+      <tr>
+        <th>CoachID</th>
+        <th>Coach Name</th>
+        <th>Wins</th>
+        <th>Active</th>
+      </tr>
+      {% for row in coaches %}
+      <tr>
+        <td>{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+        <td>{{row[2]}}</td>
+        <td>{{row[3]}}</td>
+        <td>{{row[4]}}</td>
+        <td>{{row[5]}}</td>
+        <td>{{row[6]}}</td>
+      </tr>
+    {% endfor %}
+    </table></center>
+  </body> 
 </html>
