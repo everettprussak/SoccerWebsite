@@ -1,20 +1,29 @@
+<!-- this is the creating of the page -->
 <html>
-<title>Player Menu</title>
-<h1>Player Menu</h1>
-<h2>Hello, {{playerName }}. Your playerID is {{playerID }} </h2>
-<a href="index"> Home (LOGOUT) </a>
-<br>
-<br>
-<form action = "{{ url_for('players') }}" method = "post">Player Choices:</a>
-  <br>
-<select name="option" id="option">
-  <option value="games">View Games</option>
-  <option value="personal">Personal Stats</option>
-  <option value="each_game">Goals In Each Game</option>
-  <option value="leaders">League Leaders</option>
-</select>
-<br>
-<br>
-<input type="submit" value="submit">
-</form>
+  <!-- this is setting the backround color of the page -->
+  <body style="background-color:rgb(159, 214, 231);"> 
+    <title>Player Menu</title>
+    <!-- this is the title welcoming the player signed in -->
+    <center><h1 style="font-size: 4rem; color: #c68824">Player Menu</h1></center>
+    <center><h2 style="font-size: 4rem; color: #c68824">Hello, {{playerName }}. Your playerID is {{playerID }} </h2></center>
+    <a href="index"> Home (LOGOUT) </a>
+    <!-- spacing -->
+    <br>
+    <br>
+    <!-- creates a selection text box-->
+    <center><form action = "{{ url_for('players') }}" style="font-size: 4rem; color: #000000" method = "post">Player Choices:</a>
+    <br>
+    <!-- all the options for the player to veiw -->
+    <select name="option" id="option" style="font-size: 3rem; color: #000000">
+      <option value="games">View Games</option>
+      <option value="personal">Personal Stats</option>
+      <option value="each_game">Goals In Each Game</option>
+      <option value="leaders">League Leaders</option>
+    </select>
+    <!-- spacing -->
+    <br>
+    <br>
+    <!-- creates a box and changes the the selected view when clicked -->
+    <input style="font-size: 3rem; color: #000000" type="submit" value="submit">
+  </form><center>
 </html>
