@@ -1,33 +1,37 @@
+<!-- this is the creating of the page -->
 <html>
-<title>Top Ten Scorers</title>
-<h1>Top Ten Goal Leaders (Players)</h1>
-
-<a href="players">Back</a>
-
-<p>Sorted by Season Goals. If there is a tie, then it is sorted by Ascending PlayerID.</p>
-
-<p>Top 10</p>
-<table>
-  <thread>
-    <tr>
-      <th>Rank</th>
-      <th>Player ID</th>
-      <th>Player Name</th>
-      <th>Season Goals</th>
-      <th>Team Name</th>
-    </tr>
-    <tbody>
-      {% for row in records %}
-      <tr>
-        <td>{{row[4]}}</td>
-        <td>{{row[0]}}</td>
-        <td>{{row[1]}}</td>
-        <td>{{row[2]}}</td>
-        <td>{{row[3]}}</td>
-      </tr>
-      {% endfor %}
-      </tbody>
-    </thread>
-</table>
-
+  <!-- this is setting the backround color of the page -->
+  <body style="background-color:rgb(159, 214, 231);"> 
+    <title>Top Ten Scorers</title>
+    <!-- this is for the title -->
+    <center><h1 style="font-size: 3rem; color: #000000">Top Ten Goal Leaders (Players)</h1></center>
+    <!-- this is a button for returning to the privouse page -->
+    <a href="players" style="font-size: 2rem; color: #ff0000">Back</a>
+    <!-- this is for subtitle -->
+    <center><p style="font-size: 2rem; color: #000000">Sorted by Season Goals. If there is a tie, then it is sorted by Ascending PlayerID.</p></center>
+    <center><p style="font-size: 2rem; color: #000000">Top 10</p></center>
+    <!-- creates table and displays the top ten players onn a team-->
+    <center><table>
+      <thread>
+        <tr>
+          <th>Rank</th>
+          <th>Player ID</th>
+          <th>Player Name</th>
+          <th>Season Goals</th>
+          <th>Team Name</th>
+        </tr>
+        <tbody>
+          {% for row in records %}
+          <tr>
+            <td>{{row[4]}}</td>
+            <td>{{row[0]}}</td>
+            <td>{{row[1]}}</td>
+            <td>{{row[2]}}</td>
+            <td>{{row[3]}}</td>
+          </tr>
+          {% endfor %}
+          </tbody>
+        </thread>
+    </table></center>
+  </body>
 </html>
