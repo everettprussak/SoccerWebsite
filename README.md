@@ -4,13 +4,20 @@
 
 ## How to run:
 
+### python3 pip install Flask
+
 ### python3 scehma_creation.py (schema created)
 
 ### python3 first_run.py (players, teams, and coaches inserted into tables)
+- Each Player will start with Null (or zero) goals
+- Each team will have zero wins, zero losses, and zero totalGoals
+- Each coach will have zero wins.
+
+### Optional: If you want to replicate the entire database including games, goals, and more, I have provided the datadump of the database. The file is called 'application.sql'
 
 ### python3 application.py
 
-### Go to the link provided (http://127.0.0.1:5000/index)
+### Go to this link (http://127.0.0.1:5000/index)
 
 ### To sign-in with a team, you can look inside the WorkBench or simply start with the teamID of 1 and the teamName of Argentina. After that, all of the teams and their teamID will appear. You may sign-in with any of them.
 
@@ -20,14 +27,12 @@
 ### For coach sign-in, you may again use any of the coaches, but coachID 1 and coach Name Lionel Scaloni is given.
 
 ## Issues we had:
+- We wanted to make 32 teams, but instead went with 10.
+- Had issues with using 'COMMIT' inside python code as mentioned above.
+ - conn.commit() is used instead
 
-### There are 32 teams with 26 players per team, that would take too long to hard code so we went with the top 10 teams.
 
-## Special cases:
-
-###
-
-## Project Details
+### Project Details
 
 1. Print/display records from your database/tables.
 - Records are displayed on html (players, standings, etc.)
@@ -68,3 +73,6 @@
 
 13. Use at least 5 entities
 - 5 Entities (teams,player,coach,game,goal)
+
+
+### Video Link: ()
