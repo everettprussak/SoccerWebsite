@@ -16,6 +16,11 @@
 ### Optional: If you want to replicate the entire database including games, goals, and more, I have provided the datadump of the database. The file is called 'application.sql'
 
 ### python3 application.py
+- If "Access to 127.0.0.1 was denied" is ever seen do the following:
+ - Control + C to disconnect from Application.py
+ - Go this link (chrome://net-internals/#sockets)
+ - Click "Flush socket pools"
+ - run application.py again
 
 ### Go to this link (http://127.0.0.1:5000/index)
 
