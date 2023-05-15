@@ -23,10 +23,16 @@ Option 1 will have no goals for any team or player. Each team will have zero win
 
 ### python3 application.py
 - If "Access to 127.0.0.1 was denied" is ever seen do the following:
- - Control + C to disconnect from Application.py
+ - Control + C to disconnect from application.py
  - Go this link (chrome://net-internals/#sockets)
  - Click "Flush socket pools"
  - run application.py again
+
+
+### Full Commands using Option 1:
+- python3 schema_creation.py
+- python3 first_run.py
+- python3 application.py
 
 ### Go to this link (http://127.0.0.1:5000/index)
 

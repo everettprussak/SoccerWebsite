@@ -1,4 +1,6 @@
 import mysql.connector
+
+#change password for your personal password!
 conn = mysql.connector.connect(host="localhost",
                                 user = "root",
                                 password = "Clippers47!",
@@ -7,6 +9,8 @@ conn = mysql.connector.connect(host="localhost",
 
 cursor = conn.cursor()
 
+
+# creating the schema called application
 def first_run():
     cursor.execute('''
     CREATE SCHEMA application

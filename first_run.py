@@ -1,5 +1,6 @@
 import mysql.connector
 
+#change password for your personal password!
 conn = mysql.connector.connect(host="localhost",
                                 user = "root",
                                 password = "Clippers47!",
@@ -8,6 +9,7 @@ conn = mysql.connector.connect(host="localhost",
 
 cursor = conn.cursor()
 
+# creates teams, game, player, coach, goal tables
 def first_run():
     cursor.execute('''
     CREATE TABLE teams(
@@ -90,7 +92,7 @@ def insertTeams():
 
     conn.commit()
 
-
+#inserts all players in our database to player table
 def insertPlayers():
     cursor.execute('''
     INSERT INTO player(playerID,name,age,position,goals,teamID)
@@ -359,7 +361,7 @@ def insertPlayers():
 
     conn.commit()
 
-
+# inserts all coaches into coach database
 def insertCoaches():
     cursor.execute('''
     INSERT INTO coach(coachID,name,wins,active)
@@ -379,6 +381,7 @@ def insertCoaches():
 
     conn.commit()
 
+# calling all functions
 dropTables()
 first_run()
 insertTeams()

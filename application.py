@@ -8,6 +8,7 @@ import mysql.connector
 import csv
 
 #Make Connection
+#change password for your personal password!
 conn = mysql.connector.connect(host="localhost",
                                 user = "root",
                                 password = "Clippers47!",
@@ -18,6 +19,7 @@ conn = mysql.connector.connect(host="localhost",
 cursor = conn.cursor()
 
 
+# these three lines are needed to use flask
 app = Flask(__name__)
 app = Flask(__name__, template_folder='template')
 app.secret_key = "SecretKey"
