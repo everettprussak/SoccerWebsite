@@ -4,7 +4,10 @@
 
 ## How to run:
 
-### python3 pip install Flask
+### Try install Flask with the following
+- pip3 install flask
+
+### Ensure you have mysql and mysqlworkbench downloaded
 
 ### python3 scehma_creation.py (schema created)
 
