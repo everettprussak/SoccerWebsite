@@ -8,12 +8,16 @@
 
 ### python3 scehma_creation.py (schema created)
 
-### python3 first_run.py (players, teams, and coaches inserted into tables)
+
+### Chose either player, team, coaches data without games and goals or option 2 to replicate the entire database.
+Option 1 will have no goals for any team or player. Each team will have zero wins and zero losses with no games played. Each coach will have 0 wins. This is because the goals and games datatable is not available in this option. For option 2, if you want to replicate the entire database, then it will include all goals and games as well.
+
+### Option 1: python3 first_run.py (players, teams, and coaches inserted into tables)
 - Each Player will start with Null (or zero) goals
 - Each team will have zero wins, zero losses, and zero totalGoals
 - Each coach will have zero wins.
 
-### Optional: If you want to replicate the entire database including games, goals, and more, I have provided the datadump of the database. The file is called 'application.sql'
+### Option 2: If you want to replicate the entire database including games, goals, and more, I have provided the datadump of the database. The file is called 'application.sql'
 
 ### python3 application.py
 - If "Access to 127.0.0.1 was denied" is ever seen do the following:
