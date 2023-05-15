@@ -9,8 +9,7 @@
 
 ### Ensure you have mysql and mysqlworkbench downloaded
 
-### python3 scehma_creation.py (schema created)
-
+### python3 scehma_creation.py (schema created, unless datadumping then Option 2)
 
 ### Chose either player, team, coaches data without games and goals or option 2 to replicate the entire database.
 Option 1 will have no goals for any team or player. Each team will have zero wins and zero losses with no games played. Each coach will have 0 wins. This is because the goals and games datatable is not available in this option. For option 2, if you want to replicate the entire database, then it will include all goals and games as well.
